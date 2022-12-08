@@ -1,0 +1,88 @@
+~07.12.2022 Apex Session - Mathilda (Apex Basic 2)
+DEVELOPER CONSOLE-EXECUTE 
+ANONYMOUS(CTRL+E):
+Sayı değerleri değişken türleri:
+Integer myNumber=52;
+Long myNumber2=525689452;
+Decimal myNumber3=2.63;
+Double myNumber4=5.4646876213;
+ 
+system.debug('Tamsayı: '+myNumber);
+system.debug('Uzun Sayı: '+myNumber2);
+system.debug('Ondalıklı Sayı: '+myNumber3);
+system.debug('Ondalıklı Büyük Sayı: '+myNumber4);
+//-------------------------------------------------------------
+Stringlerin büyük harfe çevrilmesi:
+ String name='salesForcE in DeVeLopER ClaRusway';
+system.debug(name);
+
+ 
+system.debug(name.capitalize());                //İlk harfi büyük harfe
+çevirir
+system.debug(name.toUpperCase());       //Hepsini büyük harf 
+yapar
+system.debug(name.toLowerCase());      //Hepsini küçük harfe 
+çevirir
+system.debug(name.Length());                             //Yazılan metnin 
+uzunluğunu verir
+system.debug(name.replace('ClaRusway','Triforcia'));      //Kelimeyi değiştirir
+system.debug(name.reverse());      //Cümleyi tersten yazma
+//----------------------------------------------------------------
+Boolean Tanımı:
+Boolean geldi;     //Boolean değişken tanımlandı
+system.debug(geldi);
+geldi=true;
+system.debug(geldi);  //değişkenin değeri true 
+oldu.
+system.debug('Personel geldi mi? '+geldi);
+ 
+geldi=false;
+system.debug(geldi);  //değişkenin değeri false 
+oldu.
+system.debug('Personel geldi mi? '+geldi);
+//-------------------------------------------------------
+ID myId;
+system.debug(myId);
+//---------------------------------------------------------
+Integer x=52;
+Decimal y=2.13;
+Decimal z=x+y;
+system.debug(z);
+//-------------------------------------------------------
+Kar elde etme:
+Decimal Alis=53.63;
+Decimal Satis=85.69;
+Decimal Kar=Satis-Alis;  //Satışdan alış çıkarılarak kar elde edildi
+system.debug(Kar);
+//------------------------------------------------------
+Sınav Notu Hesaplama:
+Decimal VizeNotu=55;
+Decimal FinalNotu=70;
+Decimal Sonuc=(VizeNotu*40/100)+(FinalNotu*60/100);
+Decimal Sonuc2=(VizeNotu*0.4)+(FinalNotu*0.6);
+ 
+system.debug('Not Ortalaması: '+Sonuc);
+system.debug('Not Ortalaması: '+Sonuc2);
+//---
+Decimal VizeNotu=55.12;
+Decimal FinalNotu=70.6;
+Decimal Sonuc=(VizeNotu*40/100)+(FinalNotu*60/100);
+Decimal Sonuc2=(VizeNotu*0.4)+(FinalNotu*0.6);
+ 
+system.debug('Not Ortalaması: '+Sonuc);
+system.debug('Not Ortalaması: '+Sonuc2);
+//--------------------------------------------------
+Kullanıcı Bilgilerini Yazdırma:
+String name='Ayşe';
+Integer age=24;
+Decimal salary=3000;
+String mail='rose@mentor.com';
+ 
+system.debug('Kullanıcı Adı: '+name);     //Kullanıcı adnı yazdırır.
+system.debug('Yaş: '+age);   //Yaşı yazdırır.
+system.debug('Maaşı: '+salary);   //Maaşı yazdırır.
+system.debug('Mail Adresi: '+mail);   //Mail adresini yazdırır.
+Ders İçi Faydalı Linkler:
+Sezar şifreleme: https://teknolojiprojeleri.com/teknik/sezar-sifreleme
+String classlar: https://developer.salesforce.com/docs/atlas.en-
+us.apexref.meta/apexref/apex_methods_system_string.htm

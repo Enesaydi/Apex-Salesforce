@@ -1,0 +1,20 @@
+string welcome = 'i\'m ender. \n i\'m mektebim.\n in spain\n';
+welcome+= 'i\'m student';
+system.debug(welcome.toUpperCase());
+system.debug(welcome.split('\n'));
+system.debug(welcome.toUpperCase().split('\n'));
+system.debug(welcome.toUpperCase().split('\n')[2]);
+
+
+string welcome = 'i\'m ender. in spain\n';
+welcome+= 'i\'m student';
+integer kod= 123;
+string wel1= string.valueOf(kod).leftPad(10,'3');
+string wel2 = wel1.leftPad(16,'sf-');
+string wel3= wel2.rightPad(26,'__c');
+
+system.debug(wel1);
+system.debug(wel2);                         //sf-sf-3333333123__c__c__c_
+system.debug(wel3);                         //SF-SF-3333333123
+system.debug(wel3.length());
+system.debug('üçleri say = '+wel3.countmatches('3'));        //üçleri say = 8
