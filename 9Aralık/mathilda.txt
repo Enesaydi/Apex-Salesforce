@@ -1,0 +1,61 @@
+List<integer> myno= new List<integer> ();
+myno.add(4);
+myno.add(32);
+myno.add(198);
+myno.add(3896);
+
+system.debug(myno);
+system.debug(myno.get(2));
+system.debug(myno);
+myno.set(2,4422);
+myno.remove(1);
+system.debug(myno);
+myno.clear();
+system.debug(myno);
+-----------------------------------------
+List<String> sehir=new List<String>();
+sehir.add('İstanbul');
+sehir.add('Ankara');
+sehir.add('Kütahya');
+sehir.add('Şırnak');
+System.debug(sehir);
+System.debug(sehir.get(0));
+sehir.set(0,'Van');
+System.debug(sehir);
+sehir.remove(2);
+System.debug(sehir);
+sehir.set(0,'Konya');
+sehir.remove(2);
+System.debug(sehir);
+
+
+Lists
+A list is an ordered collection of elements that are distinguished by their indices. List elements can be 
+of any data type—primitive types, collections, sObjects, user-defined types, and built-in Apex types.
+
+Sets
+A set is an unordered collection of elements that do not contain any duplicates. Set elements can be of any 
+data type—primitive types, collections, sObjects, user-defined types, and built-in Apex types.
+
+Maps
+A map is a collection of key-value pairs where each unique key maps to a single value. Keys and values can 
+be any data type—primitive types, collections, sObjects, user-defined types, and built-in Apex types.
+
+
+Set<String> Product=new Set<String>(); 
+Product.add('TV');
+Product.add('PC');
+Product.add('Table');
+Product.add('Eraser');
+Product.add('PC');               //2.PC eklemedi
+system.debug(Product);
+//-------------------------------------------------------
+Set<Integer> Num=new Set<Integer>(); 
+List<String> Name=new List<String>();
+ 
+//Set colections ekleme
+Num.add(72);
+Num.add(45);
+Num.add(58);
+Num.add(45);
+system.debug('Set Durum: '+Num);         //   (45,58,72)
