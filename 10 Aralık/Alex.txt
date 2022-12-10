@@ -1,0 +1,108 @@
+List<String> accountNames = New List<String>();
+accountNames.add('Apple');
+accountNames.add('Amazon');
+accountNames.add('Ebay');
+accountNames.add('facebook');
+accountNames.add('twitter');
+System.debug('accountNames :'+accountNames);
+List<String> accounts = accountNames.clone();
+System.debug('accounts : '+accounts);
+accountNames.add('salesforce');
+System.debug('accountNames :'+accountNames);
+System.debug('accounts : '+accounts);
+
+
+list<string> acc= new list <string>();
+acc.add('h') ;
+acc.add('a');system.debug(acc);
+acc.add('t');system.debug(acc);
+acc.add('a');system.debug(acc);
+acc.add('hatay');
+system.debug(acc.size());
+system.debug(acc);
+system.debug('acc de ha var mı? '+acc.contains('ha'));
+system.debug(acc[2]);
+system.debug(acc.get(3));
+
+list<string>account=acc.clone();
+list<string>account=acc;
+system.debug(account);
+
+eğer.     **‘=’**   koyarsan referans olur **‘clone()’** yazarsan o anki kopyası
+
+```sql
+set
+Set<String> Product=new Set<String>(); 
+Product.add('TV');
+Product.add('PC');
+Product.add('Table');
+Product.add('Eraser');
+Product.add('PC');               //2.PC eklemedi
+system.debug(Product);           //harfe göre sıraladı
+```
+
+FLOW=   (Karşılığı)
+
+Variable. -  text. -  multiple/collection
+
+```sql
+map<string,string> trnslt= new map <string,string>();
+//           K       V
+trnslt.put('book','kitap') ;
+trnslt.put('door','kapı');system.debug(trnslt);
+trnslt.put('car','araba');system.debug(trnslt);
+trnslt.put('pen','kalem');system.debug(trnslt);
+trnslt.put('man','adam');
+
+system.debug(trnslt);    
+//{book=kitap, car=araba, door=kapı, man=adam,pen=kalem}map<string,string> trnslt= new map <string,string>();
+
+set <string> ing=trnslt.keyset();     //ingilizce olanlar
+system.debug(ing);
+list<string> tr=trnslt.values();      //türkçe olanlar
+system.debug(tr);
+
+trnslt.put('man','ÜLKE');  // update olur (no duplice)
+trnslt.put('book','rezervasyn');  // duplikasyon izni var
+																	// ikisinide yazar
+```
+
+COLLECTION
+
+- List : - duplikasyona izin var. Aynı eleman birden fazla eklenebilir. index var. order var.
+
+List<String> variableName = New List<String>();  // boş liste
+
+List<String> variableName = New List<String>{'eleman1','eleman2'}; // elemanlı şekilde.     Ekran çıktısında () ile görülür.
+
+.add() methodu ile yeni eleman ekleme.(eleman)(index, eleman)[index]
+
+.get(index) elemana ulaşıyoruz.
+
+.size() listenin boyunu eleman sayısını .
+
+.remove(index) elemanı siliyoruz.
+
+.clear() tüm listeyi siliyoruz.
+
+.contains(eleman) eleman listede varmı yokmu
+
+.clone() liste tamamen kopyalanır. klonelanır.
+
+= referans oluyor. hangi listeye eleman eklersek ekleyelim 2 sine de eklenir
+
+- SET : - Duplikasyon'a izin vermiyor... İndex yok. order yok.
+
+Set<String> variableName = New Set<String>();    {} ile gösterilir.
+
+Set<String> variableName = New Set<String>();    {} ile gösterilir.
+
+- MAP : 2 SÜTUNLUDUR. <KEY =DATATYPE, VALUE= DATATYPE> <Id,Sobject> <String,String> <Integer,String>
+
+MAP içinden SET üretebililiriz.  (keyset )
+
+MAP içinden LİST üretebiliriz. (Value)
+
+Map için Add methodu = PUT (key,value) ile yapılır.
+
+{key=value, key=value,key=value}
