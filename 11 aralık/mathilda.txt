@@ -1,0 +1,31 @@
+Maps
+A map is a collection of key-value pairs where each unique key maps to a single value. 
+Keys and values can be any data type—primitive types, collections, sObjects, user-defined 
+types, and built-in Apex types.
+
+
+
+Map<String,String> doctorInfo=new Map<String,String>();   //Her iki değeride 
+string olarak yazarız.
+doctorInfo.put('1234','Dr.Ahmet');
+doctorInfo.put('745654','Dr. Ayşe');
+doctorInfo.put('4567','Dr. Rose');
+doctorInfo.put('745654','Dr. Ayşe');  //aynı id olan değer olduğu için yine bir 
+tanesini ekler
+ 
+system.debug('Doktor Listesi İlk Hali: '+doctorInfo);
+system.debug('Liste Uzunluğu: '+doctorInfo.size());  //Liste uzunluğu hesaplar 
+system.debug('Get Kullanımı: '+doctorInfo.get('745654'));  //ID string olduğu için 
+tırnakla yazarız.
+system.debug('Get Kullanımı: '+doctorInfo.get('Dr. Ayşe'));  //ID'yle veri getiririz 
+ama değerle getiremeyiz.
+
+
+
+Integer x=9;                system.debug(x);
+x++; //x'i 1 arttır                system.debug(x);
+++x; //x'i 1 arttır                system.debug(x);
+x--;   //x'i 1 azaltır                system.debug(x);
+--x; //x'i 1 azaltır                system.debug(x);
+x/=2; //x'i 2'ye böler                system.debug(x);
+x+=5;  //x'e 5 ekler.                system.debug(x);
