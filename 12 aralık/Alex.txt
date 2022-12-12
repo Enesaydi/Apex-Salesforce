@@ -18,3 +18,27 @@ if(isAdmin||isDeveloper){
 } else {
     System.debug('OR  VEYA => ne admin nede developer ilanlarına bakıyor.....');
 }
+
+
+==   Eşit mi?                      !=    Eşit değil mi?
+
+=== Tam eşitmi                     !==   Tam Eşit değil mi?
+
+
+
+no=22;
+String ifnu = no<20 ? 'T':'F';
+
+boolean isover500k=false;
+boolean   isITCompany= true;
+string txtOR = (isover500k || isITCompany) ?'ŞİRKET ya IT ŞİRKETİ ya da GELİRİ 500K+ ÜZERİNDE ya da ikiside' :'ŞİRKET ne IT ŞİRKETİ be de GELİRİ 500K+ ÜZERİND geliri var';
+system.debug(txtOR);
+integer x=4;
+integer y=10;
+system.debug(x<y);system.debug(x>y);
+system.debug(x<=y);system.debug(x>=y);
+
+integer z=10;
+z++;    system.debug(z);             //increment 1
+z+=5;	system.debug(z);		    //increment 5
+z--;    system.debug(z);
