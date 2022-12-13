@@ -1,0 +1,16 @@
+string name='fatma';
+if (name=='fatma'){system.debug('kullanıcı doğru');}else {system.debug('yanlış kullanıcı');}
+integer sayi=25; string email='oyt';
+integer k=math.mod(sayi,2);
+if (k==1||email=='oyt') {
+    system.debug(sayi +' sayısı çifttir');
+    }else {
+        system.debug(sayi+' tektir');
+    }
+
+
+integer ve=24
+if(ve < 10){system.debug('tek basamaklıdır');
+}else if( ve >=10 && v<100) {
+system.debug'2 basamaklıdır');
+}else if(ve>=100){system.debug('3 basamaklıdır');}
