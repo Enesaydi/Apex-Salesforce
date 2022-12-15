@@ -1,0 +1,34 @@
+--------------------------Apex Class;----------------
+public class hesapla {
+public static integer s=455;
+public static string name='455.';
+
+public static integer Max (integer x, integer y){
+    if(x>y){return x;}else{return y;}
+}
+public static integer topla (integer v, integer t){
+    return v+t;
+}
+public static decimal bol (decimal b, decimal n){
+    return b/n;
+}
+public static string wel (string m){
+    return 'Hoşgeldin '+m;}
+}
+
+
+
+--------------------------debug;----------------
+
+system.debug(hesapla.s);
+                     // 455
+system.debug(hesapla.name); 
+                     // 455.
+system.debug(hesapla.max(44,12));
+                     // 44
+system.debug(hesapla.topla(44,12));
+                     // 56
+system.debug(hesapla.bol(44,12));
+                     // 3,66..667
+system.debug(hesapla.wel('sami'));
+                     // Hoşgeldin sami

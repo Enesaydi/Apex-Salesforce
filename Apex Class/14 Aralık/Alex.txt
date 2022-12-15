@@ -1,0 +1,101 @@
+- Parametre: paragrafın içine yazılan
+- 1.Public: Same namespace or inside the salesforce
+- 2.Private: İnside the class
+- 3.Global: Between namespace **inside** the saleforce /or **outside** the salesforce
+
+--------------------------Apex Class;----------------
+
+public class firstclass {
+    public static void welcome(string a){
+        system.debug('Hello Apex i m '+a);}
+        public static void name(string a){
+        system.debug('Apex my name is '+a);}
+      public static void welcome(integer x){
+    system.debug('i m '+x+' years old');}
+  public static integer dclass;
+}
+public static string name;
+
+2
+public class firstclass {
+    public static void welcome(string a){
+        system.debug('Hello Apex i m '+a);}
+        public static void name(string a){
+        system.debug('Apex my name is '+a);}
+      public static void welcome(integer x){
+    system.debug('i m '+x+' years old');}
+  public static integer dclass;
+}
+public static string name;
+
+
+3
+public class firstClass {   
+    // properties
+private Integer classNumber;  // private public global 
+private static String username; // = 'I am new Instructor Alex'; 
+    
+    // Setter methodu ( MEMUR )
+public static void setUserName(String newUserName){
+        username=newUserName; // I am new Instructor Alex }
+    
+    // Getter methodu ( MEMUR )
+public static String getUserName(){   // return   getUserName = 'selam'
+return username;       }
+    
+    public static void welcome(){
+        if(String.isNotBlank(username)){
+             System.debug('Hello Apex Class ' + username);
+        } 
+        else {
+            System.debug('Hello Bro....');
+            
+        }
+    }
+}
+
+
+
+--------------------------Debug;----------------
+
+public class firstClass {   
+    // properties
+private Integer classNumber;  // private public global 
+private static String username; // = 'I am new Instructor Alex'; 
+    
+    // Setter methodu ( MEMUR )
+public static void setUserName(String newUserName){
+        username=newUserName; // I am new Instructor Alex }
+    
+    // Getter methodu ( MEMUR )
+public static String getUserName(){   // return   getUserName = 'selam'
+return username;       }
+    
+    public static void welcome(){
+        if(String.isNotBlank(username)){
+             System.debug('Hello Apex Class ' + username);
+        } 
+        else {
+            System.debug('Hello Bro....');
+            
+        }
+    }
+}
+
+2
+firstclass.come(); 
+                     //hii
+firstclass.name='kaman';                              *Properties
+                     //-yazdırmadıkki etc.system
+firstclass.come();
+                     //hello dear kaman
+
+3
+firstClass.welcome();   //Hello Bro...
+// firstClass.username'Selam';
+firstClass.setUserName('Selam');   //Setter method
+// best practice method Setter method dur....
+System.debug(firstClass.getUserName());
+firstClass.setUserName('I am new student Niyazi');
+firstClass.welcome();  //Hello Apex Class selam
+                    
