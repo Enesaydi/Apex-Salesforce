@@ -1,0 +1,45 @@
+public class workers {
+	//properties
+    public string name;
+    private integer workinghours=0;
+    public decimal income;
+    public decimal expense;
+    
+//properties static
+    public static integer totalhours=0
+
+    //method
+    
+    public void addhours(integer howmany){
+        workinghours+=howmany;
+    }
+    public integer hours(){
+        return workinghours;
+    }
+}
+
+
+-----------debug--------------
+
+
+
+workers alex = New workers();
+workers sergio = New workers();
+alex.name='alex victor';
+system.debug('alex.name'+alex.name);
+            //alex.namealex victor
+alex.addhours(4);
+alex.addhours(6);
+alex.addhours(9);
+system.debug('alex.workinghours (private) =>alex hours '+alex.hours());
+            //alex.workinghours (private) =>alex hours 19
+system.debug('workers total '+workers.totalhours);
+sergio.name='sergio paco';
+system.debug(sergio.name);
+            //sergio paco
+sergio.addhours(7);
+sergio.addhours(9);
+sergio.addhours(2);
+system.debug('sergio.workinghours (private) =>sergio hours '+sergio.hours());
+            //sergio.workinghours (private) =>sergio hours 18
+system.debug('workers total '+workers.totalhours);
