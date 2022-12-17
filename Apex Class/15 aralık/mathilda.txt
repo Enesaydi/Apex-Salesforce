@@ -1,0 +1,57 @@
+public class kontrol {
+    public static string tekmi(integer sayi){ 
+    if(0==math.mod(sayi,2)){return'Cift';}else{return'tek';}}
+
+public static string dogru (string mail,integer sifre){
+        if(mail=='anh@gmail.com'&&sifre==1234){return'başarılı' ;
+            }else{return'başarısız' ;}
+    }
+public static void topl (integer m,integer s){
+        integer t=m+s; system.debug(t);
+    }
+public static void mesaj (){
+      string mesaj='Merhaba void'; system.debug(mesaj);
+    }} //system.debug('Merhaba void');  yazsakda olur
+
+
+
+public class kontrol {
+    public static string name='ayşe';
+    public string lname='hes';
+    private string gender='kız';
+}
+
+
+- void varsa return yok
+- void olunca system.debug le çağırmıosun
+-------------debug----------------
+
+system.debug(kontrol.tekmi(7));                      //tek
+system.debug(kontrol.tekmi(110));                    //çift
+
+
+system.debug(kontrol.dogru('anh@gmail.com',123));    // Başarısız
+system.debug(kontrol.dogru('anh@gmail.com',1234));    //başarılı
+string hbh =kontrol.dogru('anh@gmail.com',1234);    
+system.debug(hbh);                                   //başarılı
+
+kontrol.topl(4,7);
+                     //11
+kontrol.mesaj();
+                     //Merhaba void
+
+
+
+                     system.debug(kontrol.tekmi(7));                      //tek
+system.debug(kontrol.tekmi(110));                    //çift
+
+
+system.debug(kontrol.dogru('anh@gmail.com',123));    // Başarısız
+system.debug(kontrol.dogru('anh@gmail.com',1234));    //başarılı
+string hbh =kontrol.dogru('anh@gmail.com',1234);    
+system.debug(hbh);                                   //başarılı
+
+kontrol.topl(4,7);
+                     //11
+kontrol.mesaj();
+                     //Merhaba void
