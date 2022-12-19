@@ -1,0 +1,50 @@
+ÇALIŞMA
+public class workers {
+	
+    public string name;
+    public decimal expense=0;
+    public integer hours=0;
+    private decimal income=0;
+    
+    public static integer totalhours=0;
+ public static decimal totalexpense=0;
+    public static decimal totalincome=0;
+    
+    public void tekharcama(decimal miktar){
+        totalexpense+=miktar;   expense+=miktar;}
+      public void tekincome(decimal mikta){
+        totalincome+=mikta;  income+=mikta;}
+    public void teksaat(integer saat){
+       hours+=saat;  totalhours+=saat;   }
+    
+   public decimal tekincame(){
+        return income;}
+}
+-----------------------------------------------
+
+
+
+ÇALIŞMA
+workers sali=new workers();    workers enes=new workers();
+enes.name='enesa';sali.name='saliha';
+system.debug('Oyuncular: '+enes.name+' '+sali.name);
+
+enes.tekharcama(490);enes.tekharcama(60);enes.tekharcama(150);
+enes.tekincome(730);enes.tekincome(30);enes.tekincome(30);
+enes.teksaat(20);enes.teksaat(10);enes.teksaat(3);
+
+system.debug('enes harcama: '+enes.expense);
+system.debug('enes gelir: '+enes.tekincame());
+system.debug('enes çalışma: '+enes.hours);
+
+sali.tekharcama(790);sali.tekharcama(990);sali.tekharcama(050);
+sali.tekincome(30);sali.tekincome(799);sali.tekincome(550);
+sali.teksaat(25);sali.teksaat(12);sali.teksaat(6);
+
+system.debug('salih harcama: '+sali.expense);
+system.debug('salih gelir: '+sali.tekincame());
+system.debug('salih çalışma: '+enes.hours);
+
+system.debug('toplam harcama: '+workers.totalexpense);
+system.debug('toplam gelir: '+workers.totalincome);
+system.debug('toplam saat: '+workers.totalhours);
