@@ -1,0 +1,64 @@
+1.Ders
+
+- [https://workbench.developerforce.com/query.php?](https://workbench.developerforce.com/query.php?qrjb=eyJRQl9vYmplY3Rfc2VsIjoiTGVhZCIsIlFCX2ZpZWxkX3NlbCI6WyJBZGRyZXNzIiwiQ2l0eSIsIkNvbXBhbnkiLCJGaXJzdE5hbWUiLCJMYXN0TmFtZSIsIldlYnNpdGUiXSwiUUJfb3JkZXJieV9maWVsZCI6IiIsIlFCX29yZGVyYnlfc29ydCI6IkFTQyIsIlFCX251bGxzIjoiRklSU1QiLCJRQl9saW1pdF90eHQiOiIiLCJtYXRyaXhfcm93cyI6IiIsIm1hdHJpeF9jb2xzIjoiIiwibnVtRmlsdGVycyI6IjIiLCJRQl9maWx0ZXJfZmllbGRfMCI6IlRpdGxlIiwiUUJfZmlsdGVyX2NvbXBPcGVyXzAiOiJzdGFydHMiLCJRQl9maWx0ZXJfdmFsdWVfMCI6IlZQIiwic29xbF9xdWVyeSI6IlNFTEVDVCBBZGRyZXNzLENpdHksQ29tcGFueSxGaXJzdE5hbWUsTGFzdE5hbWUsV2Vic2l0ZSBGUk9NIExlYWQgV0hFUkUgVGl0bGUgTElLRSAnVlAlJyJ9#qr)
+
+- burada quary editor kullanarak yapabilin;
+
+//SELECT Id, Name, OtherCountry, Title, Email, FirstName, LastName, AccountId FROM Contact
+
+/*first way        
+list<contact> mcontact= new list <contact>();
+multilead =[]; */
+
+//second way
+list<contact> mcontact=[SELECT Id, Name, OtherCountry, Title, Email, FirstName, LastName, AccountId 
+                        FROM Contact];
+system.debug(mcontact.size());
+
+for(contact scontact:mcontact){
+    system.debug(scontact.Name+' -- '+scontact.Email);
+}
+
+2
+/*public static void getload(){
+list<contact> mcontact=[SELECT Id, Name, OtherCountry, Title, Email, FirstName, LastName, AccountId 
+                        FROM Contact where Department='Finance'];
+
+debug----contactapex.getload();
+
+----------------------|Aynısı|------------------------------------------------
+
+public static void getload(string depart){
+list<contact> mcontact=[SELECT Id, Name, OtherCountry, Title, Email, FirstName, LastName, AccountId 
+                        FROM Contact where Department=:depart];
+debug
+contactapex.getload('Finance');   */
+contactapex.getload('Production');
+
+WHERE;
+
+- OR
+public static void getload(string depart,string saluta){
+list<contact> mcontact=[SELECT Id, Name, OtherCountry, Title, Email, FirstName, LastName, AccountId 
+                        FROM Contact where Department=:depart and Salutation=:saluta];
+//contactapex.getload('Finance','mr.');
+
+- IN
+where title in ('CEO', 'VP')      =  where title='CEO' or title='VP' 
+
+- LIKE
+WHERE Country LIKE '%USA' / WHERE Country LIKE 'USA%' //başlayan , biten
+
+- LIMIT
+FROM Contact limit 6   ;// ilk 6 
+
+- ORDER BY
+FROM Contact  Order by Createddate  ASC ; //  DESC
+FROM Contact  Order by  Title // asc olarak yapar.
+
+- null
+SELECT Name, Email FROM Contact
+ORDER BY Email
+NULLS LAST
+
+// Returns null records at the beginning
