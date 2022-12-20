@@ -1,0 +1,16 @@
+list <lead> leadli=[SELECT Id, FirstName, LastName, Name, Company, City, State, Email FROM Lead];
+system.debug(leadli);
+system.debug(leadli.size());
+system.debug(leadli.get(16));
+
+//for(integer x=3;x<leadli.size();x++){system.debug(leadli.get(x));}
+------------|aynısı |----------- 
+for(lead bakam:leadli){system.debug(bakam);}
+
+
+system.debug(leadli.get(16).name.toUpperCase());
+for(integer x=3;x<leadli.size();x++){ //sonraki yöntem olmaz burada.
+    system.debug(leadli.get(x).name.toUpperCase());}
+
+
+SELECT Id, FirstName, LastName, Name, Company, City, State, Email FROM Lead where name= 'Violet'
