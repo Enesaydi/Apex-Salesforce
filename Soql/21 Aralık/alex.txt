@@ -1,0 +1,66 @@
+### Child to Parent
+
+```java
+
+// standard objects child to parent
+SELECT Name, Account.Name FROM Contact
+
+// custom objects child to parent
+SELECT Address__c, Picture__c, Broker__**r**.Name FROM Property__c
+
+SELECT **Course__r.Name**, Name, Id, CreatedDate, Course__c FROM Lesson__c
+- c yerine r yazılır
+```
+
+```java
+Anonymous
+
+list <lesson__c> lessons= [SELECT Course__r.Name, Name, 
+                           Id, CreatedDate, Course__c 
+                           FROM Lesson__c];
+
+for(lesson__c singlelesson:lessons){
+system.debug(singlelesson.name +' ---|--- '+singlelesson.Course__r.Name);}
+    
+```
+
+### Parent to Child
+
+
+// custom objects parent to child
+SELECT Id, Name, CreatedDate, ( SELECT  Name FROM Lessons__r) FROM Course__c
+
+
+list <course__c> courses= [SELECT Id, Name, CreatedDate, ( SELECT  Name, Id, CreatedDate FROM Lessons__r) FROM Course__c];
+
+for(course__c singlecour:courses){
+    system.debug('--||'+singlecour.name+'||--');
+    for(lesson__c singlelesson:singlecour.Lessons__r){
+        system.debug('-'+singlelesson.name);} }
+
+
+
+-----------
+SELECT Id, Name, Industry, ShippingState,
+											(SELECT Id, Name FROM Contacts), BillingCountry,
+											(SELECT Id, Name, TotalOpportunityQuantity, Amount 
+																								FROM Opportunities) FROM Account
+
+-------------
+
+list <account> accounts= [SELECT Id, Name,Phone, Industry, ShippingState,(
+    SELECT Id, Name FROM Contacts), BillingCountry,(
+        SELECT Id, Name, TotalOpportunityQuantity, Amount 
+        FROM Opportunities) FROM Account];
+
+																	// contactssssss ve oppurtunitiesssss e dikkat
+
+for(account singleacc:accounts){
+    system.debug('**'+singleacc.Name+'- 📞'+singleacc.Phone);
+    for(contact scontact:singleacc.Contacts){
+    system.debug(scontact.Name+'-');
+    }
+    for(Opportunity soppor:singleacc.Opportunities){
+    system.debug(soppor.Name+'-💵'+soppor.Amount); 
+    }
+
