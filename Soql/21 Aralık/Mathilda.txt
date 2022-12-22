@@ -1,0 +1,24 @@
+SOQL
+
+```java
+list <Account> acc=[SELECT Id, Name FROM Account];
+
+system.debug(acc.size());
+
+//for(integer x=3;x<leadli.size();x++){system.debug(leadli.get(x));}
+//for(lead bakam:leadli){system.debug(bakam);}
+system.debug(acc.get(6).name.toUpperCase());
+for(integer x=0;x<acc.size();x++){ //sonraki yöntem olmaz burada.
+    system.debug(acc.get(x).name.toUpperCase());}
+
+acc.get(6).name='triforcia';
+update acc;
+```
+
+- SELECT Id, Name FROM Account order by CreatedDate Desc limit 5
+
+child. / parent
+
+* SELECT Id, Name, Email, account.name Phone, Salutation FROM Contact
+
+* SELECT Id, Name, (SELECT Id, Name, Salutation FROM Contacts) FROM Account 
