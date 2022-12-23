@@ -1,5 +1,5 @@
-public with sharing class fromvs {
-    public static fromvs() {
+public static with sharing class fromvs {
+    public static void fromvs() {
 system.debug('hello');
     }
 }
