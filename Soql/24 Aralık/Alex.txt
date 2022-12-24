@@ -1,0 +1,82 @@
+SELECT count(Id), count(Name), count(Amount),max(Amount),avg(Amount),sum(Amount),
+       count(type) FROM Opportunity where StageName='closed won'
+                                      ||
+SELECT count(Id), count(Name), count(Amount),max(Amount),avg(Amount),sum(Amount),
+       count(type) FROM Opportunity where IsWon =true
+
+
+       —DATE FORMAT—
+_____________________________________________________________________________
+
+       LAST_N_DAYS:n
+NEXT_N_DAYS:n
+NEXT_N_WEEKS:n
+YESTERDAY
+TODAY
+TOMORROW
+
+// example usage
+SELECT Id FROM Account WHERE CreatedDate = LAST_N_DAYS:365
+
+// check others from the related web site.
+
+SELECT count(Id), count(Name),sum(Amount),
+       count(type) FROM Opportunity where CloseDate= NEXT_WEEK
+-CloseDate= LAST_N_DAYS:70
+-CloseDate= NEXT_N_DAYS:11
+
+COUNT_DISTINCT(BillingState) = // Farklı olan eyaletleri say
+
+* count = .size(); 
+_____________________________________________________________________________
+- [ ]  **COUNT (Admin : ROLLUP Summary, FLOW )**
+- [ ]  **MIN (Admin : ROLLUP Summary)**
+- [ ]  **MAX (Admin : ROLLUP Summary)**
+- [ ]  AVG
+- [ ]  **SUM (Admin : ROLLUP Summary)**
+- [ ]  COUNT_DISTINCT
+_____________________________________________________________________________
+// SELECT Id, Name, Account.Name, Amount, CloseDate FROM Opportunity WHERE CloseDate = LAST_N_DAYS:45
+// Aggregate
+// SELECT MIN(Amount), MAX(Amount),AVG(Amount),SUM(Amount) FROM Opportunity WHERE CloseDate = LAST_N_DAYS:45
+// Datatype  variablename = Exp.
+
+Map olduğu için expr0 = key'leri istiyoruz
+
+List<AggregateResult> getOpportunity = [SELECT MIN(Amount), MAX(Amount),AVG(Amount),SUM(Amount) 
+                                    FROM Opportunity 
+                                    WHERE CloseDate = LAST_N_DAYS:45];  // List<AggregateResult>
+Decimal Min = (Decimal)getOpportunity.get(0).get('expr0');  
+// Min+=20000.50;
+System.debug('MIN(Amount) : '+ Min);
+System.debug('MAX(Amount) : '+ getOpportunity.get(0).get('expr1'));
+System.debug('AVG(Amount) : '+ getOpportunity.get(0).get('expr2'));
+System.debug('SUM(Amount) : '+ getOpportunity.get(0).get('expr3'));
+/*
+List<AggregateResult> results= [SELECT COUNT(Id),COUNT(Email),COUNT(Phone), COUNT(firstName)  FROM Contact];
+system.debug(results[0].get('expr1'));*/
+
+_____________________________________________________________________________
+
+// All List
+// SELECT Id, Name, Account.Name, Amount, CloseDate FROM Opportunity WHERE CloseDate = LAST_N_DAYS:45
+
+// Aggregate
+// SELECT MIN(Amount), MAX(Amount),AVG(Amount),SUM(Amount) FROM Opportunity WHERE CloseDate = LAST_N_DAYS:45
+
+// SELECT Account.Name,SUM(Amount),MIN(Amount),MAX(Amount),AVG(Amount) FROM Opportunity GROUP BY Account.Name
+
+
+// Datatype  variablename = Exp.
+List<AggregateResult> getOpportunity = [SELECT Account.Name,
+                                        SUM(Amount),MIN(Amount),MAX(Amount),AVG(Amount) 
+                                        FROM Opportunity 
+                                        GROUP BY Account.Name];  // List<AggregateResult>
+
+
+
+for(AggregateResult AR:getOpportunity){
+    System.debug(AR.get('Name'));
+    System.debug('Total Opportunity Amount : '+ AR.get('expr0'));
+    
+}
