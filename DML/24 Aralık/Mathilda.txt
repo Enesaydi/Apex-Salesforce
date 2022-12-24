@@ -1,0 +1,57 @@
+public class DML {
+    
+    public static void ekle(string a){
+        account x=new account();
+        x.Name=a;
+        insert x;
+    }
+    public static integer t(integer c,integer b){
+        return c+b;
+    }
+    }
+
+
+    ____________________
+    DML.ekle();
+
+system.debug(DML.t(5,7));   //12
+----------------------------------
+
+list <account> mylist=[SELECT Id, Name FROM Account where Name like '%irke%'];
+list <account> y=new list <account>(); 
+for(account bir:mylist){
+    bir.site='www.info.com';
+    y.add(bir);    
+}update y;
+
+
+
+list <account> fromvs=[SELECT Id, Name FROM Account where Name like '%irke%'];
+list <account> y= new list <account>();
+for(account b:fromvs){
+    if(b.name=='sirket 2'){
+        y.add(b);
+    }
+}
+delete y;
+_____________________________________________________________________________
+SİLİNMİŞLERİ GÖRMEK İÇİN ; ( ALL ROWS)
+
+
+list <account> g=[SELECT Id,IsDeleted, Name 
+                  FROM Account where Name 
+                  like '%irke%' ALL ROWS];
+
+for(account j:g){system.debug(j.Name+' '+j.IsDeleted);}
+_____________________________________________________________________________
+
+- SİLİNMİŞLERİ GERİ GETİR ;       **UNDELETE**
+
+list <account> g=[SELECT Id,IsDeleted, Name 
+                  FROM Account where Name 
+                  like '%irke%' ALL ROWS];
+list <account> y= new list <account>();
+for(account j:g){
+    if(j.IsDeleted==true){ y.add(j);system.debug(j);}
+    system.debug(j.Name+' '+j.IsDeleted);}
+undelete y;
