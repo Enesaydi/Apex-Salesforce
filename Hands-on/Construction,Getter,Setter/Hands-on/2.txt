@@ -1,0 +1,46 @@
+public class Cars {
+string color;  string pocket;
+  integer model=2003;     integer speed=0;    integer maxs=330;    integer brake=0;
+
+//Constructions
+    public cars(){}  // construction olarak girmesekte çalıştırması için gerekli satır.
+    public cars(string color,string pocket,integer model){this.color=color;this.pocket=pocket;this.model=model;} 
+  
+       //setter 
+    public void setmodel(integer model){        this.model=model;    }   
+    public void setcolor(string color){        this.color=color;    }
+    public void setpocket(string pocket){        this.pocket=pocket;    } 
+    public void setspeed(integer speed){        this.speed=speed;    } 
+          //getter
+    public integer getmodel(){return model;}
+    public string getcolor(){return color;}
+    public string getpocket(){return pocket;}
+    public integer getmaxs(){return maxs;}
+    
+    public void run(){        system.debug('the vehicle is running');    }
+    public void stop(){system.debug('the vehicle is stopped');}
+    public void acceleration(integer accelerate){speed+=accelerate; if(speed<maxs){
+        system.debug('current '+speed);}else { system.debug('current '+maxs);} }
+    public void brake(integer brak){speed-=brak; if(speed>0){
+    system.debug('current '+speed) ;}else { system.debug('current 0');} }
+}
+___________debug ekranı_______________________________________________________
+,cars opel=new cars();
+   
+opel.setmodel(2000);opel.setcolor('red');opel.setpocket('mokka');
+
+system.debug(opel.getmodel()+'\n' +opel.getcolor()+
+             '\n' +opel.getmaxs()+'\n' +opel.getpocket());
+opel.run();opel.stop();
+opel.acceleration(40);opel.acceleration(380);
+opel.acceleration(790);opel.brake(1360);
+
+AYNISI============ DEBUG________________________________________________
+
+cars opel=new cars('red','mokka',2009);
+   
+system.debug(opel.getmodel()+'\n' +opel.getcolor()+
+             '\n' +opel.getmaxs()+'\n' +opel.getpocket());
+opel.run();opel.stop();
+opel.acceleration(40);opel.acceleration(380);
+opel.acceleration(790);opel.brake(1360);
