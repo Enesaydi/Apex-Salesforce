@@ -1,0 +1,22 @@
+1.
+public static void kare(integer a,integer b){system.debug('Kare nin alanı: '+a * b);}
+                        //cars.kare(9,4);
+2.?
+3.// 2,6 ?
+4.public static void hi(string j){system.debug('Hello '+j);}. //cars.hi('nali');
+5.public static integer ucgen(integer tabn,integer yks){integer u=tabn*yks/2; return u;}
+//system.debug(cars.ucgen(8,10));
+6.public static void srlm(integer a,integer b, integer c){
+if(a<b&&a<c){if(b<c){system.debug(a+'<'+b+'<'+c);}else{system.debug(a+'<'+c+'<'+b);}}
+else if(b<a&&b<c){if(a<c){system.debug(b+'<'+a+'<'+c);}else{system.debug(b+'<'+c+'<'+a);}}
+else if(c<a&&c<b){if(a<b){system.debug(c+'<'+a+'<'+b);}else{system.debug(c+'<'+b+'<'+a);}}}
+} 
+7. 3+1=4...
+8.
+9.public static void rastg(integer r){
+      integer i= Integer.valueOf(Math.Random() * 4);
+        if (i==r){system.debug('💥💥 Well Done 👍');}
+        else{system.debug('Senin no: '+r); system.debug('Sistem no: '+i); }
+        }
+// x.rastg(f);
+
