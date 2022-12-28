@@ -1,0 +1,37 @@
+1.public integer tekmi(integer h){
+        if(0==math.mod(h,2)){system.debug('the '+ h+' is çift');
+                            return h;}else{
+                             system.debug('the '+ h+' is tek');
+                            return h;}
+       
+//noel i=new noel();       i.tekmi(5);
+public string tekmi(integer h){
+        if(0==math.mod(h,2)){
+                            return 'çift';}else{
+                            return 'tek';}
+//noel i=new noel();   system.debug(i.tekmi(5));
+2.list <string> c= list <string> {}???????????????
+
+3.public void veri(string soz){
+        system.debug(soz);
+
+4.public void j(){
+  list<string> k=new list <string> {'hane','ali','jale','veli'};
+  for(integer l=0;l< k.size();l++ ){
+  if(k.get(l)=='jale'){
+      continue;}
+      system.debug(k.get(l));
+        }
+    } 
+5.set <integer> x=new set <integer>();
+for (integer z=1;z<=100;z++){x.add(z);}system.debug(x);
+
+7.list<string> kol=new list<string>();
+string x='mehaba1963';
+system.debug(x.length());
+for(integer q=1;q<x.length();q++){
+    
+    kol.add(x.charAt(q));
+    system.debug(kol);
+}
+// burada list for dışında olmalı yoksa çalışmaz..
