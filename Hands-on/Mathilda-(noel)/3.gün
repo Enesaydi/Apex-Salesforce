@@ -1,0 +1,3 @@
+- The WHERE clause filters records in a SOQL query that has no aggregate function.
+- The HAVING clause filters the results after data is aggregated by an aggregate function.
+
