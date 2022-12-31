@@ -1,0 +1,85 @@
+1.contact c= new contact();
+c.LastName='han';
+c.FirstName='mehmet';
+insert c;
+
+2.public class handson {
+    public static void guncelle(string w){
+        list<account> b=[SELECT Id, Name FROM Account];
+       //    list<account> a= new list<account>();
+        
+        for(account h:b){
+            h.Site=w;
+           // a.add(h);
+        }
+        update b;
+//2 şekildede çalışıyor
+
+4.list<Contact> b=[SELECT Id, Name FROM Contact];
+       list<Contact> a= new list<Contact>();
+        
+        for(Contact h:b){
+            if(h.Name=='mehmet han')  {  a.add(h);}
+        }
+        delete a;
+5.public static void sil(string c){
+        list<account> b=[SELECT Id, Name FROM account];
+       list<account> a= new list<account>();
+        
+        for(account h:b){
+            if(h.Name==c)  {  a.add(h);}
+        }  delete a;
+
+6.list<contact> acc=[SELECT Id,IsDeleted,  Name FROM contact ALL ROWS];
+list<contact> av=new list<contact>();
+for(contact bir:acc){
+    if(bir.IsDeleted==true){av.add(bir);}
+}undelete av;
+
+
+_______________________________________________________________________________________________________
+5.gün
+_____________________________________________________
+
+1.
+list<integer> sayi=new list<integer>();
+for(integer s=0;s<=100;s++){
+    if(0==math.mod(s,2)){if(0==math.mod(s,5)){sayi.add(s);}}
+}
+system.debug(sayi);
+
+2.
+Öğrenci –Ders kontrol Algoritması  
+ Eğer öğrenci zoom dersine katıldıysa “hoşgeldiniz mesajını” versin  
+katılmadıysa “Sizi derste göremedik “mesajını verecek  
+ 
+ Eğer öğrenci zoom dersinde değilse ve  3 günden fazla derse 
+katılmadıysa “yolunda gitmeyen bir durum mu var “mesajı verilecek  
+değilse “herşey yolunda umutlu olun” 
+ 
+ Eğer öğrenci ders kayıtlarını dinlemediyse ve  zoom dersinde değilse 
+ve 3 günden fazla derse katılmadıysa “bire bir görüşmeye alınacak “ 
+mesajı verilecek  
+Yukarıda verilen algoritmayı bir method olarak oluşturun
+//cevap;
+
+public void izleme(string o,boolean z,boolean k,integer s){
+        system.debug('Öğrencimiz olan '+o+';');
+        if(z==true){system.debug('Hoşgeldiniz');}else{system.debug('Sizi derste göremedik');}
+        if(z==true||s<=3){system.debug('herşey yolunda umutlu olun');}else{system.debug('yolunda gitmeyen bir durum mu var ');}
+        if(k==false&&z==false&&s>3){system.debug('bire bir görüşmeye alınacak');}}
+        
+        
+3.//Şifreleme   CAESAR CİPHER(Sezar Şifreleme)
+
+string message='enes ,berra';
+integer x;
+integer y;
+ string yeni=' ';
+string ara;
+for(integer q=0;q<message.length();q++ ){
+    x=message.charAt(q);
+    y=x+10;
+   ara=string.fromCharArray(new integer[]{y});
+   yeni=yeni+ara;system.debug(yeni);
+}system.debug(yeni);
