@@ -1,0 +1,56 @@
+Debug:
+
+lead singlelead=new lead();
+singlelead.FirstName='from';
+singlelead.LastName='apex';
+singlelead.Company='Open - Not Contacted';
+
+system.debug('Before: '+singlelead.id);
+system.debug(singlelead);
+
+insert singlelead;
+
+system.debug('After: '+singlelead.id);
+system.debug(singlelead);
+________________________________________________
+
+Account Create
+// Account ID 
+// Contact Create
+// Account Id : Contact Lookup to Account  ( AccountId : )
+Account singleAcc = New Account();
+singleAcc.Name = 'Apex - Clarusway';
+insert singleAcc; 
+Contact singleCont = New Contact();
+singleCont.FirstName = 'Alex APEX';
+singleCont.LastName = 'ALEX APEX 3'; // required
+singleCont.AccountId=singleAcc.id; // Apex - Clarusway Account ID .
+---------insert singleCont;----------
+System.debug(singleAcc);
+System.debug(singleCont);
+___________________________________________________
+
+string acctnam='Apex - Clarusway';
+Account singleAcc =[SELECT Id, Name FROM Account 
+                    where Name=:acctnam LIMIT 1];
+
+singleAcc.Name=singleAcc.Name.toUpperCase();
+singleAcc.Phone='234324345';
+
+System.debug(singleAcc);
+//update veya upsert olur ama insert olmaz - id var işin içinde
+****update singleAcc;
+______________________________________________________
+
+string acctnam='Apex - Clarusway';
+Account singleAcc =[SELECT Id, Name FROM Account 
+                    where Name=:acctnam LIMIT 1];
+System.debug(singleAcc);
+****delete singleAcc;
+System.debug(singleAcc);
+_______________________________________________________
+Account singleAcc =[SELECT Id, IsDeleted, Name FROM Account 
+                    where IsDeleted=true ALL ROWS];
+System.debug(singleAcc);
+****undelete singleAcc;
+System.debug(singleAcc);
