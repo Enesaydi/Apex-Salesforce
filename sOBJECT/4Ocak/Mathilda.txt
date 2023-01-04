@@ -1,0 +1,61 @@
+1.ders / 2.Ders
+
+```java
+SELECT Id, Name, (SELECT  Name FROM Kitaps__r) , Yayinevi__r.Name   FROM Yazar__c
+
+Yayinevi__c w=new Yayinevi__c();
+w.Name='gri';
+insert w;
+
+yazar__c x=new yazar__c();
+x.Name='ensar3';
+x.Yayinevi__c=w.id;
+insert x;
+system.debug(x.id);
+
+kitap__c q=new kitap__c();
+q.Name='yeni 4 apexle';
+q.Yazar__c=x.id ;
+insert q;
+system.debug(q.id);
+```
+
+```java
+public class Kitap {
+
+    public static void kayit(String t, string k,string z){
+Yayinevi__c w=new Yayinevi__c();
+w.Name=t;
+insert w;
+
+yazar__c x=new yazar__c();
+x.Name=k;
+x.Yayinevi__c=w.id;
+insert x;
+
+kitap__c q=new kitap__c();
+q.Name=z;
+q.Yazar__c=x.id ;
+insert q;
+system.debug('kitab: '+q.Name+'- yazar: '+x.Name+'- yayınevi: '+w.Name);
+    }
+        }
+```
+___________________________________________________debug_______________________________________
+kitap.kayit('otto2','veli2','kiraz');
+```
+
+- **SOSL**
+
+find {de}
+
+
+list<list<sObject>> q=[find 'ki' in all fields 
+                       returning yazar__c(name), Kitap__c(name),yayinevi__c(name)];
+system.debug(q);
+_______________
+list<list<sObject>> q=[find 'şi' in all fields returning account(name), contact(name)];
+system.debug(q);
+system.debug(q.get(0));
+system.debug(q.get(1));
+_______________________
