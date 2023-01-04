@@ -21,6 +21,7 @@ for(integer x=0;x<3;x++){
 }
 insert multic;
 insert multio;
+
 __________________________________________________________
 
 
@@ -30,4 +31,5 @@ account yeni=[SELECT Id, Name FROM Account
              where Name ='alex cw'];
 
 merge yeni esk;
+
 __________________________________________________________
