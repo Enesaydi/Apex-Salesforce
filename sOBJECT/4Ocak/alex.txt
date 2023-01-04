@@ -1,0 +1,77 @@
+account CW = [Select Id,Name
+                 from Account
+                 where name = 'alex cw'];
+System.debug (CW);
+System.debug(cw.name);
+Sobject CWobj =[Select Id,Name
+                 from Account
+                 where name = 'alex cw'];
+System.debug (CWobj);
+System.debug(cwobj.get('Name'));
+__________________________________________________
+
+contact CW = [Select Id, Name, Phone, Email,Account.Name,Account.Phone
+                 from contact
+                 where name like '%Tim Bar%'];
+system.debug(CW);
+//child
+system.debug(CW.Name);
+system.debug(CW.Phone);
+system.debug(CW.Email);
+//parent
+system.debug(CW.Account.Name);
+system.debug(CW.Account.Phone);
+//Generik SOBJECT
+Sobject sc=[Select Id, Name, Phone, Email,Account.Name,
+            Account.Phone from contact
+                 where name like '%Tim Bar%'];
+system.debug(sc);
+//child
+system.debug(sc.get('id'));//system.debug(sc.id);
+system.debug(sc.get('Name'));
+system.debug(sc.get('Phone'));
+system.debug(sc.get('Email'));
+//Parent
+system.debug(sc.getSobject('Account').get('Name'));
+system.debug(sc.getSobject('Account').get('Phone'));
+
+
+
+
+// parent to Child SOQL 
+Account CW =[SELECT Id, Name,
+             (SELECT Id, Name, Phone,Email FROM Contacts),
+             (SELECT Id, Name, Amount, CloseDate, StageName FROM Opportunities)
+             FROM Account 
+             WHERE Name='Apex CW'];
+System.debug('Account Details : ');
+System.debug(CW.id);
+System.debug(CW.Name);
+System.debug('Related SObjects --- Contacts ');
+System.debug(CW.Contacts); // List<Contact>  // Contact[]
+for(Contact loopContact:CW.Contacts){
+    System.debug(loopContact.Name);
+}
+System.debug('Related SObjects --- Opportunities ');
+System.debug(CW.Opportunities); // List<Opportunity> // Opportunity[]
+for(Opportunity loopOpp:CW.Opportunities){
+    System.debug(loopOpp.Name);
+    System.debug(loopOpp.CloseDate);    
+}
+
+
+
+
+//child to parent
+Sobject CW =[SELECT Id, Name,
+             (SELECT Id, Name, Phone,Email FROM Contacts),
+             (SELECT Id, Name, Amount, CloseDate, StageName FROM Opportunities)
+             FROM Account 
+             WHERE Name='Dickenson plc'];
+System.debug(CW.get('id'));
+System.debug(CW.get('Name'));
+
+System.debug(CW.getSobjects('Contacts'));    // s harfine dikkat sondaki methodda
+for (contact cont:CW.getSobjects('Contacts')){    
+    system.debug(cont.Name);
+}

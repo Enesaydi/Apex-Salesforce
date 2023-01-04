@@ -1,0 +1,33 @@
+account cw =new account();
+cw.Name='alex cw';
+insert cw;
+
+list <contact> multic=new list <contact>();
+list <opportunity> multio=new list <opportunity>();
+
+for(integer x=0;x<3;x++){
+    contact scont=new contact();
+    scont.FirstName='Apex '+x;
+     scont.LastName='vorkers '+x;
+      scont.accountid=cw.id;
+    multic.add(scont);
+    
+    opportunity sopp=new opportunity();
+    sopp.Name=cw.Name+' new opp '+x;
+    sopp.CloseDate=Date.today()+34;
+    sopp.StageName='Prospecting';
+    sopp.accountid=cw.id;
+    multio.add(sopp);    
+}
+insert multic;
+insert multio;
+__________________________________________________________
+
+
+account esk=[SELECT Id, Name FROM Account 
+             where Name ='enes cw'];
+account yeni=[SELECT Id, Name FROM Account 
+             where Name ='alex cw'];
+
+merge yeni esk;
+__________________________________________________________
