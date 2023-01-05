@@ -1,2 +1,82 @@
 Database
-___________________________________________________
+
+
+______account cw =new account();
+cw.Name='alex cw';
+insert cw;
+
+list <contact> multic=new list <contact>();
+list <opportunity> multio=new list <opportunity>();
+
+for(integer x=0;x<3;x++){
+    contact scont=new contact();
+    scont.FirstName='Apex '+x;
+     scont.LastName='vorkers '+x;
+      scont.accountid=cw.id;
+    multic.add(scont);
+    
+    opportunity sopp=new opportunity();
+    sopp.Name=cw.Name+' new opp '+x;
+    sopp.CloseDate=Date.today()+34;
+    sopp.StageName='Prospecting';
+    sopp.accountid=cw.id;
+    multio.add(sopp);    
+}
+insert multic;
+insert multio;
+__________________________________________________________
+
+
+account esk=[SELECT Id, Name FROM Account 
+             where Name ='enes cw'];
+account yeni=[SELECT Id, Name FROM Account 
+             where Name ='alex cw'];
+
+merge yeni esk;
+__________________________________________________________
+
+
+
+
+Related İNSERT
+
+
+account a =new account();
+a.Name='odev için';
+insert a;
+
+ Opportunity op=new Opportunity();
+op.Name='odev için anlaşma ';
+op.StageName='Prospecting';
+op.CloseDate=date.today()+5;
+a.id=op.AccountId;
+insert op;                ****önemli*** -->  // database.insert(op,true);
+
+DELETE
+
+list <account> acc=[select Name from account 
+                    where name like '%flow ile %'];
+System.debug(acc);
+delete acc;
+
+
+___________________________DATABASE_______________________
+
+// DML statement
+Database.SaveResult[] srList = Database.insert(acctList, false);
+
+// Iterate through each returned result
+for (Database.SaveResult sr : srList) {
+    if (sr.isSuccess()) {
+        // Operation was successful, so get the ID of the record that was processed
+        System.debug('Successfully inserted account. Account ID: ' + sr.getId());
+    }
+    else {
+        // Operation failed, so get all errors                
+        for(Database.Error err : sr.getErrors()) {
+            System.debug('The following error has occurred.');                    
+            System.debug(err.getStatusCode() + ': ' + err.getMessage());
+            System.debug('Account fields that affected this error: ' + err.getFields());
+        }
+    }
+}_____________________________________________
