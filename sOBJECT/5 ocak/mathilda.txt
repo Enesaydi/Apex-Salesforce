@@ -1,0 +1,37 @@
+list<list<sobject>> x=[FIND 'co' in all fields 
+                       returning Account(Name),Contact (name)];
+system.debug(x);
+system.debug(x.get(0));
+system.debug(x.get(1));
+system.debug(x.get(0).get(1));
+
+1.                                                          2.
+for (sobject ac:x.get(0)){                                  list <account> acc=x.get(0);
+    system.debug(ac);                                       for (account ac:acc){
+}                                                               system.debug(ac.name);}
+
+
+
+
+list<list<sobject>> x=[FIND 've' in all fields  
+                       returning kitap__c(Name),yazar__c (name)];
+system.debug(x);
+list<kitap__c> k=x.get(0);
+for (kitap__c herk:k){
+    system.debug(herk);
+}
+list<yazar__c> y=x.get(1);
+for (yazar__c hery:y){
+    system.debug(hery);
+}
+
+
+
+userr__c u=new userr__c();
+u.Name='ali';
+insert u;
+
+rolle__c r= new rolle__c();
+r.Name='student';
+u.id=r.userr__c;
+insert r;
