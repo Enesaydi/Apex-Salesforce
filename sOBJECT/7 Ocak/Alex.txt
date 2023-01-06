@@ -1,0 +1,73 @@
+
+
+list<list<sobject>> searchr=[Find 'united' in all fields returning 
+    account(id,name,industry),
+    contact(id,name,accountid),
+    opportunity(id,name,StageName,closedate)];
+//system.debug(searchr);
+for (list<sobject> lists:searchr){
+    for(sobject liss:lists){
+        system.debug(liss);
+    }
+}
+___________________________________________________________________
+
+list<list<sobject>> searchr=[Find 'unit*' in all fields returning 
+    account(id,name,industry),
+    contact(id,name,accountid),
+    opportunity(id,name,StageName,amount,closedate)];
+//system.debug(searchr);
+list<account> acc=searchr.get(0);
+list<contact> cont=searchr.get(1);
+list<opportunity> opp=searchr.get(2);
+
+for (account liac:acc){
+        system.debug(liac.name);
+}system.debug('___________________________');
+for (contact lico:cont){
+        system.debug(lico.name);
+}system.debug('___________________________');
+for (opportunity liop:opp){
+        system.debug(liop.name+' : '+liop.amount);
+}
+
+
+___________________________________________________________________
+
+
+Map<Id,account> mapacc=new Map<Id,account> ([SELECT Id, Name, Type, 
+                         ParentId, Phone, Website, 
+                         AnnualRevenue, Industry 
+                         FROM Account where ParentId=null]);
+
+                               // set<id> keys= mapacc.keyset();
+for(id accid:mapacc.keyset()){  //for(id accid:keys){
+    account singlac=mapacc.get(accid);
+   system.debug(singlac.name);
+    system.debug(singlac.parentid);
+    system.debug(singlac.phone);
+    system.debug(singlac.AnnualRevenue);
+}
+
+
+________________
+
+Map<Id,account> mapacc=new Map<Id,account> ([SELECT Id, Name, Type, 
+                         ParentId, Phone, Website, 
+                         AnnualRevenue, Industry 
+                         FROM Account where ParentId=null]);
+
+map<string,account> nametoaccmap=new map<string,account>();
+                               // set<id> keys= mapacc.keyset();
+for(id accid:mapacc.keyset()){  //for(id accid:keys){
+    account singlac=mapacc.get(accid);
+    nametoaccmap.put(singlac.name,singlac);
+   system.debug(nametoaccmap);
+}
+account cw =nametoaccmap.get('Pyramid Construction Inc.');
+system.debug(cw.phone);
+
+
+Map<Id,Contact> mapContact = New Map<Id,Contact>([SELECT Id,Name,
+                                                  AccountId FROM Contact 
+                                                  WHERE AccountId=:accountIds]);
