@@ -1,0 +1,70 @@
+public class creater {
+    public static void acc(string d){
+       list <account> accv=new list <account>();
+      
+        for(integer q=0;q<10;q++){
+            account aca=new account();
+            aca.Name=d+' : '+q;
+            accv.add(aca);               
+        }
+        insert accv;
+        system.debug(accv);
+    }
+    
+    public static void chang(){
+        list <opportunity> oppo=new list <opportunity> ();
+        for(opportunity oppr:[SELECT Id, Name, StageName FROM Opportunity] ){
+            if(oppr.StageName=='Closed Won'){oppr.Name=oppr.Name+'_Won';}
+            oppo.add(oppr);
+        }
+        update oppo; 
+    }
+    public static void upser(string z){
+        list <account> acuu=new list <account>();
+        for(integer q=0;q<10;q++){
+            account aca=new account();
+            aca.Name=z+' (upsert2) : '+q;
+            acuu.add(aca);  }
+          
+        for(account cunt:[SELECT Id, Name, Description FROM Account]){
+            cunt.Description='upsert ile değişti2';
+            acuu.add(cunt);                  }
+        upsert acuu;
+                }
+    public static void deltte(string f){
+      string ser='%'+f+'%';
+        list <account> hu= new list <account>();
+        
+        for(account cunt:[SELECT Id, Name, Description FROM Account where name like:ser])
+        {   hu.add(cunt);
+             }  delete hu;
+    }
+    public static void undeltte(string f){
+      string ser='%'+f+'%';
+        list <account> hu= new list <account>();
+        
+        for(account cunt:[SELECT Id, Name, Description FROM Account where name like:ser ALL ROWS])
+        {   hu.add(cunt);
+             }  undelete hu;    }   }
+
+
+
+
+
+
+
+
+list <account> acuu=new list <account>();
+
+            account aca=new account();
+            aca.Name=' (merge) : ';
+            acuu.add(aca);  
+account aca2=new account();
+            aca2.Name=' (merge) : 2 ';
+            acuu.add(aca2);
+insert acuu;
+account ww=[select id,name from account where name='(merge) : 2'];
+account www=[select id,name from account where name='(merge) :'];
+
+merge www ww;
+
