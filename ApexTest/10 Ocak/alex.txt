@@ -1,0 +1,66 @@
+# Apex Test
+
+TEST CLASS ın Faydaları
+
+1. Apex class ve trigger da yazılan iş mantığının beklendiği gibi çalışmasını sağlamak.
+2. Herhangi bir değişiklikten/kod eklemesinden sonra mevcut işlevlerin beklendiği gibi çalıştığından emin olmak.
+3. Apex kodlarının bağlı kuruluşlara paketlenmesine ve dağıtılmasına yardımcı olmak.
+
+**TEST RUNNER:**
+
+Unit test is a function that executed by a software called a test-runner
+
+To deploy your code in production org, you need
+
+**at least 75% code coverage**
+
+.
+
+@isTest(SeeAllData=true)    => Tüm CRM kayıtlarını görürüz.
+
+@isTest => sadece test verilerini görürüz.
+
+class____________________
+
+public class Calc {
+    public static integer sum(integer x,integer y){
+    
+        return x+y;
+    }
+    public static integer sub(integer x,integer y){
+       
+        return x-y;
+    }
+     public static integer mul(integer x,integer y){
+      
+        return x*y;
+    }
+     public static integer div(integer x,integer y){
+    if(y==0){return 0;}
+        return x/y;
+    }
+}
+test__________________
+
+public class Calc {
+    public static integer sum(integer x,integer y){
+    
+        return x+y;
+    }
+    public static integer sub(integer x,integer y){
+       
+        return x-y;
+    }
+     public static integer mul(integer x,integer y){
+      
+        return x*y;
+    }
+     public static integer div(integer x,integer y){
+    if(y==0){return 0;}
+        return x/y;
+    }
+}
+
+
+
+class____________________
