@@ -1,0 +1,40 @@
+ders object (Budget)
+
+
+list<Budget__c> a =new list<Budget__c>();
+
+list<string> butl= new list<string> {
+    'Ocak','Şubat','Mart','Nisan','Mayıs',
+        'Haziran','Temmuz','Ağustos',
+        'Eylül','Ekim','Kasım','Aralık'};
+for (integer x=0;x<=11;x++){
+    Budget__c bud=new Budget__c();
+    bud.name=butl.get(x)+' 2022';
+    a.add(bud);
+    system.debug(bud);
+}
+//İNSERT 
+insert a;
+system.debug(a);
+
+list<income__c> ain =new list<income__c>();
+list<expense__c> aex =new list<expense__c>();
+
+for(budget__c her:a){
+    income__c inc=new income__c();
+     expense__c  exp =new expense__c();
+    inc.budget__c=her.id;
+    exp.budget__c=her.id;
+    inc.item__c=3000;
+    inc.Income_Type__c='Wage';
+    exp.item__c=3000;
+    exp.Expense_Type__c='Credit Card';
+    ain.add(inc);
+    aex.add(exp);
+}
+insert ain;
+insert aex;
+
+system.debug(ain);
+system.debug(aex);
+```
