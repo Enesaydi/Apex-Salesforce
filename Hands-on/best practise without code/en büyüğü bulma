@@ -1,0 +1,9 @@
+list <integer> sayi =new list <integer>();
+for(integer x=1;x<10;x++){
+    sayi.add(Integer.valueof((Math.random() * 1000)));
+}
+system.debug(sayi);
+
+integer y=sayi.get(0);
+for(integer k:sayi){if (y<k){y=k;} }
+system.debug(y);
