@@ -1,0 +1,52 @@
+public class sifre {
+
+    public static integer uzunl(string s){
+        integer d=s.length();
+        return d;
+    } 
+    public static boolean dogru(string m,integer s){
+        if(m=='ea92'&&s==1234){return true;}else{return false;}
+    }
+}
+test__________________
+
+@istest
+public class sifretest {
+    @istest
+    public static void test1(){
+        integer d = sifre.uzunl('238738');
+        system.assertEquals(6, d);
+        boolean b=sifre.dogru('ea92',1234);
+        system.assertEquals(true, b); 
+    }
+}
+________________________________________________________________________
+
+
+
+public class accon {
+
+    public static void create(string a,string ad, string so){
+        account acc=new account();
+        acc.Name=a;
+        insert acc;
+        contact con=new contact();
+        con.firstname=ad;
+        con.LastName=so;
+        con.AccountId=acc.Id;
+        insert con;    }
+}
+test__________________
+
+public class accon {
+
+    public static void create(string a,string ad, string so){
+        account acc=new account();
+        acc.Name=a;
+        insert acc;
+        contact con=new contact();
+        con.firstname=ad;
+        con.LastName=so;
+        con.AccountId=acc.Id;
+        insert con;    }
+}
