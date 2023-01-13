@@ -1,0 +1,28 @@
+Integer x=2349823894;
+Integer digit=0;
+String message = String.valueOf(x);
+        Integer y=message.length();
+        while(x>10){
+            system.debug(y+'.digit is: '+math.mod(x,10));
+            x=x/10;
+            y--;
+        }
+        system.debug(y+'.digit is: '+x);
+___________________________________________________________
+
+integer x=56456;
+String message = String.valueOf(x);
+integer y;
+string ara;
+system.debug(message+' has '+message.length()+' digits.');
+for(integer q=0;q<message.length();q++ ){
+    y=message.charAt(q);
+   ara=string.fromCharArray(new integer[]{y});
+   system.debug(q+'. digit is '+ara);
+}
+___________________________________________________________
+
+String newx = String.valueOf(x);
+        List<String> xl=newx.split('');
+for(integer v;)
+        system.debug(x+' has '+ xl.size()+' digits.');       ...
