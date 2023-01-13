@@ -1,0 +1,46 @@
+public class accounthand {
+    
+     public static void addStudenttoCohortwithOpportunity(string label,list<contact> ogr,list<opportunity> amnt){
+        account kurs=new account();
+        kurs.Name=label;
+        insert kurs;
+        
+        for (contact hogr:ogr){
+            hogr.AccountId=kurs.id;  }        
+        insert ogr;
+        
+         for (opportunity hamnt:amnt){
+            hamnt.AccountId=kurs.id; } 
+        insert amnt;
+    }
+
+
+________________________________________________________________________
+
+@isTest
+public class accounthandtest {
+
+    @istest
+    public static void kurstest(){
+        list<contact> og =new list<contact>();
+        for(integer cn=1;cn<=10;++cn){
+            contact y=new contact();
+            y.FirstName='ogrenci '+cn;            y.LastName=','+cn+' güz';
+            og.add(y);        }
+        list<opportunity> op =new list<opportunity>();
+        for(integer cne=1;cne<=10;++cne){
+            opportunity opp=new opportunity();    opp.StageName='Prospecting';
+            opp.name='kurs anlaşması, '+cne;      opp.CloseDate=date.today();
+            opp.Amount=3000;
+            op.add(opp);                }
+        accounthand.addStudenttoCohortwithOpportunity('label', og, op);
+        
+        list <contact> ogt=[select id, name from contact];           
+list<account> accl=[select id,name from account];
+        list <opportunity> opt=[select id, name,amount,accountid from opportunity];
+                       
+        system.assertEquals('label', accl.get(0).name);
+        system.assertEquals(10, ogt.size());
+        system.assertEquals(10, opt.size());   
+        system.assertEquals(accl.get(0).id, opt.get(0).accountid);     
+                }
