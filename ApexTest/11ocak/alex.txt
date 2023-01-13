@@ -1,0 +1,344 @@
+@isTest
+public class accounthandtest {
+    @isTest
+    public static void createtestcon(){
+        list<contact> multic=new list <contact>();
+        
+       for (integer sd=0;sd<200;sd++){
+            contact singc= new contact();
+            singc.firstName='test contact '+sd;
+            singc.lastName='contact '+sd;
+            multic.add(singc);           
+        }
+        accounthand.relation('kohort 3',multic);
+       list<contact> actual=[select id, name,accountid,account.name from contact];
+        
+        account sac=[select id,name from account limit 1];
+        
+        system.assertEquals(200, actual.size());
+        system.assertEquals(sac.Id, actual.get(0).accountid);
+        system.assertNotEquals(null, actual.get(0).accountid);
+        system.assertEquals('kohort 3', sac.Name);
+    }
+________________________________________________________________________________
+
+public class accounthand {
+    
+    public static void relation(string kohort,list <contact> multic){
+        account acc=new account();
+        acc.name=kohort;
+        insert acc;
+        for (contact singc:multic){
+            singc.AccountId=acc.Id;
+        }
+        upsert multic;
+            }
+
+  ________________________________________________________________________
+
+ 
+ 
+ 
+public class AccountHandler {
+    
+    public static Boolean addStudenttoCohort(String CohortName,List<Contact> multiContact ){
+        
+        
+        if(CohortName==null || CohortName==''){
+            return false;
+        }
+        
+         for(Contact loopcontact:multiContact){
+             
+             
+        
+            if(loopcontact.lastName==null || loopcontact.lastName==''){
+                return false;
+            }
+             
+         }
+        
+        
+        
+        
+        Account singleAccount = New Account();
+        
+        singleAccount.Name=CohortName; 
+        
+        insert singleAccount;
+        
+        
+        for(Contact loopcontact:multiContact){
+            loopcontact.AccountId=singleAccount.id;
+              
+        }
+        
+        upsert multiContact;
+      
+        
+		return true;        
+    }
+    
+    
+    
+    
+    
+    
+    public static void createUpperCase(List<Account> multiAcc){ // bulkification
+        
+        for(Account acc:multiAcc){
+            acc.name=acc.name.toUpperCase();
+        }
+        
+        insert multiAcc;  
+        
+    }
+    
+    
+    
+}
+
+
+
+ test__________________
+
+
+  @isTest
+public class AccountHandlerTest {   
+    
+    @isTest
+    public static void addStudenttoCohort_TEST1(){  // POSTIVE BEHAVIOR , SINGLE ACCOUNT, MULTI CONTACT
+        // Preapare Data
+        
+        List<Contact> multiContact = New List<Contact>();
+        
+        for(Integer num=1;num<=200;num++){
+            Contact singleContact= New Contact();
+            singleContact.FirstName='TEST ' + num;
+            singleContact.LastName='STUDENT '+num;
+            
+			multiContact.add(singleContact);            
+        }
+        
+        Boolean result = AccountHandler.addStudenttoCohort('TEST COHORT',multiContact);
+        
+        
+        // Test and Evaluate
+         
+        List<Contact> actual = [SELECT Id, Name, accountid, Account.Name FROM Contact];
+        
+        Account singleAcc = [SELECT id, Name FROM Account LIMIT 1];
+        
+        System.assertEquals(true, result);
+        
+        System.assertEquals(200, actual.size());  
+        
+        System.assertNotEquals(null, actual.get(0).accountid);  // TEST 1 STUDENT 1  
+          
+        System.assertEquals(singleAcc.id, actual.get(0).accountid); 
+        
+        System.assertEquals('TEST COHORT', singleAcc.Name);
+        
+        
+    }
+    
+    
+    
+    @isTest
+    public static void addStudenttoCohort_TEST2(){  // NEGATIVE BEHAVIOUR
+        
+           // Preapare Data
+        
+        List<Contact> multiContact = New List<Contact>();
+        
+        for(Integer num=1;num<=200;num++){
+            Contact singleContact= New Contact();
+            singleContact.FirstName='TEST ' + num;
+            // singleContact.LastName='STUDENT '+num;
+            
+			multiContact.add(singleContact);            
+        }
+        
+        Boolean result=AccountHandler.addStudenttoCohort('TEST COHORT',multiContact);
+        
+        
+        // Test and Evaluate
+         
+        List<Contact> testcontact = [SELECT Id, Name, accountid, Account.Name FROM Contact];
+        
+        List<Account> testAcc = [SELECT id, Name FROM Account LIMIT 1];
+        
+        System.debug(testAcc);
+        System.debug(testcontact);
+        
+        System.assertEquals(false, result); // contact there is no last name ( Required ) 
+        System.assertEquals(0, testAcc.size());
+        
+        System.assertEquals(0, testcontact.size());
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+     @isTest
+    public static void addStudenttoCohort_TEST3(){  // NEGATIVE BEHAVIOUR
+    
+          
+           // Preapare Data
+        
+        List<Contact> multiContact = New List<Contact>();
+        
+        for(Integer num=1;num<=200;num++){
+            Contact singleContact= New Contact();
+            singleContact.FirstName='TEST ' + num;
+            singleContact.LastName='STUDENT '+num;
+            
+			multiContact.add(singleContact);            
+        }
+        
+        Boolean result=AccountHandler.addStudenttoCohort('',multiContact);
+        
+        
+        // Test and Evaluate
+         
+        List<Contact> testcontact = [SELECT Id, Name, accountid, Account.Name FROM Contact];
+        
+        List<Account> testAcc = [SELECT id, Name FROM Account LIMIT 1];
+        
+        System.debug(testAcc);
+        System.debug(testcontact);
+        
+        System.assertEquals(false, result); // account there is no name ( Required ) 
+        System.assertEquals(0, testAcc.size());
+        
+        System.assertEquals(0, testcontact.size());
+        
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+	@isTest
+    public static void createtest1(){   // BULK TEST
+        List<Account> multiAcc = New List<Account>();
+        
+        for(Integer x=1;x<=200;x++){
+            
+            Account singleAcc = New Account();
+            
+            singleAcc.Name='TEST Acc '+ x;
+            multiAcc.add(singleAcc);
+            
+        }
+        AccountHandler.createUpperCase(multiAcc);
+        
+        List<Account> testAcc = [SELECT id, Name FROM Account];
+        
+        
+        System.assertEquals(200, testAcc.size());
+        
+    }
+    
+    
+    @isTest
+    public static void createtest2(){   // SINGLE TEST
+        List<Account> multiAcc = New List<Account>();
+            Account singleAcc = New Account();
+            
+            singleAcc.Name='TEST Acc 1';
+            multiAcc.add(singleAcc);
+            
+      
+        
+        AccountHandler.createUpperCase(multiAcc);
+        
+        List<Account> testAcc = [SELECT id, Name FROM Account];
+        
+        
+        System.assertEquals(1, testAcc.size());
+        
+    }
+    
+
+}
+
+
+kolay kısım____________________________________________
+public class accounthand {
+    
+    public static boolean relation(string kohort,list <contact> multic){
+        account acc=new account();
+        acc.name=kohort;
+        insert acc;
+        for (contact singc:multic){
+            singc.AccountId=acc.Id;
+            if(singc.LastName==null||singc.LastName==''){
+                return false;
+            }
+        }
+        
+        upsert multic;
+        return true;
+    }
+
+
+
+test_________________________________________________________________________
+
+@isTest
+public class accounthandtest {
+    @isTest
+    public static void createtestcon(){   // POSTIVE BEHAVIOR , SINGLE ACCOUNT, MULTI CONTACT
+        list<contact> multic=new list <contact>();
+        
+       for (integer sd=1;sd<201;sd++){
+            contact singc= new contact();
+            singc.firstName='test '+sd;
+            singc.lastName='contact '+sd;
+            multic.add(singc);           
+        }
+       boolean result= accounthand.relation('kohort 3',multic);
+       
+        list<contact> actual=[select id, name,accountid,account.name from contact];
+        
+        account sac=[select id,name from account limit 1];
+        
+        system.assertEquals(200, actual.size());
+        system.assertEquals(sac.Id, actual.get(0).accountid);
+        system.assertEquals(true,result);
+        system.assertEquals('kohort 3', sac.Name);
+    }    
+    
+     @isTest
+    public static void createtestcon2(){         //Negative behaviar
+        list<contact> multic=new list <contact>();
+        
+       for (integer sd=0;sd<200;sd++){
+            contact singc= new contact();
+            singc.firstName='test contact '+sd;
+          //  singc.lastName='contact '+sd;
+            multic.add(singc);           
+        }
+       boolean result= accounthand.relation('kohort 3',multic);
+       list<contact> actual=[select id, name,accountid,account.name from contact];
+        
+        account sac=[select id,name from account limit 1];
+        
+        system.assertEquals(false, result);
+        system.assertEquals(0, actual.size());
+        system.assertEquals('kohort 3', sac.Name);
+    }
