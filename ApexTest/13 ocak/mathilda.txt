@@ -1,0 +1,31 @@
+public static void onlya(string q){
+
+        account acc=new account();
+        acc.Name=q;
+        insert acc;        
+    }
+    public static void mult(list<string> e){
+        list <account> acco=new list <account>();
+        for(string he:e){
+            account acc=new account();
+            acc.Name=he;
+            acco.add(acc);
+        }insert acco;    }
+
+
+        ________________________________________________________________________
+
+
+        @istest
+    public static void onlyy(){
+        for(integer i=1;i<110;i++){    
+            accon.onlya('şirket '+i);}
+    }
+    @istest
+    public static void mulst(){
+        list <string> aa=new list <string>();
+        for (integer f=0;f<50;f++){
+            string acnt='şirket '+f;
+            aa.add(acnt);            
+        }
+        accon.mult(aa);
