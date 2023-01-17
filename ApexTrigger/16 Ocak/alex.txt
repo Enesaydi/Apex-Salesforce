@@ -1,0 +1,74 @@
+trigger LeadTrigger on Lead (before insert) {
+    System.debug('.......Lead Trigger is Working.......');
+    system.debug(Trigger.New);
+    
+    
+    for(Lead singleLead:Trigger.New){   
+        // list<Lead> multiLead = Trigger.New 
+        // Yeni oluşturulan Lead kayıtları var. ( 1 - 1000 x)
+        // 
+        
+        System.debug('Before Update....');
+        singleLead.firstName= singleLead.firstName.toUpperCase();
+        singleLead.LastName= singleLead.LastName.toUpperCase();
+        
+        singleLead.Company=singleLead.Company.toUpperCase();
+        
+         System.debug('After Update....');
+        System.debug(singleLead);
+        if(string.isBlank(singlelead.email)){
+          singlelead.email.adderror('please! write the email');    //***field'ın altında gösterir***
+            //singlelead.adderror('please! write the email');        ***    genelde gösterir     ***
+        // if(singlelead.email==null)
+}
+            
+    }
+   
+}
+test____________________________________________________________________________________________________
+
+@istest
+public class leadtriggerTest {
+    @testsetup 
+    public static void setup(){
+        List<Lead> testLeads = New List<Lead>();
+        
+        for(Integer x=1;x<=10;x++){
+            Lead slead = New Lead();
+                slead.FirstName='test '+x;
+                slead.LastName='test '+x;
+                slead.Email='tes@'+x+'tmail.co';
+                slead.Company='testCompany '+x;
+            testLeads.add(slead);
+        }
+        insert testLeads;
+    }
+    @isTest
+    public static void leadTest1(){
+               
+        // Trigger Run LeadTrigger FistName,LastName and Company text Case Uppercase.
+        
+        List<Lead> multiTest = [SELECT id,firstName,LastName,Company FROM Lead ];
+        
+        system.debug('Trigger Result : '+ multiTest);
+        
+        Integer x=1;
+        for(Lead testLead:multiTest){
+           System.assertEquals('TEST '+x, testLead.firstName);
+            x++;
+        }
+    }
+      @isTest
+    public static void leadTest2(){
+        
+        List<Lead> Test = [SELECT id,firstName,LastName,Company FROM Lead ];
+        
+        system.debug('Trigger Result : '+ Test);
+        System.debug('check Factory Setting');
+        System.debug(Test.get(0).FirstName);
+        System.debug(Test.size());
+        System.assertEquals(10,test.size());
+            
+        }
+        
+    }
