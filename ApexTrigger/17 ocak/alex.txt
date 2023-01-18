@@ -1,0 +1,203 @@
+trigger LeadTrigger on Lead (before insert, before update, before delete,                             
+                             after insert,after update, after delete, after undelete) {
+                                 
+  //  System.debug('LeadTrigger is running .....' + Trigger.OperationType);   
+  //  
+ 
+  List<Task> multiTask = New List<Task>();                               
+                           
+                                 switch on Trigger.OperationType {
+                                     
+                                     // field update / Validation Rule
+                                     when BEFORE_INSERT {}
+                                     when BEFORE_UPDATE {}
+                                     when BEFORE_DELETE {}
+                                     
+                                     
+                                     // Record Id .... Relation ... 
+                                     when AFTER_INSERT {
+                                         
+                                         // bulkification.....   Trigger.new   =  List<Lead>
+                                         
+                                         
+                                         for(Lead singleLead:Trigger.New){
+                                             
+                                             
+                                             if(String.isBlank(singleLead.phone)){
+                                                 // Create Task...
+                                                 Task singleTask = New Task();
+                                                 singleTask.Subject  = 'Update Phone Number .....';
+                                                 singleTask.ActivityDate = date.Today()+10;
+                                                 singleTask.WhoId = singleLead.id; // LEAD ID.... Lookup...
+                                                 singleTask.OwnerId = singleLead.OwnerId;
+                                                 singleTask.Status='Not Started';
+                                                 singleTask.IsReminderSet=True;
+                                                 singleTask.ReminderDateTime=Date.Today();
+                                                 multiTask.add(singleTask);
+                                                 
+                                                
+                                             }
+                                             
+                                         }
+                                         
+                                         
+                                         
+                                        insert multiTask;      
+                                         
+                                     }
+                                     when AFTER_UPDATE {}
+                                     when AFTER_DELETE {}
+                                     
+                                     when AFTER_UNDELETE {}
+                                     
+                                     
+                                     
+                                 }                            
+                                 
+}
+
+test____________________________________________________________________________________________________
+
+
+@isTest
+public class LeadTest {
+    
+    @testSetup
+    public static void setup(){ // Factory Setting
+        
+         // Prepare Data
+        List<Lead> testLeads = New List<Lead>();
+        
+        for(Integer x=1;x<=500;x++){
+            Lead slead = New Lead();
+            
+                slead.FirstName='test '+x;
+                slead.LastName='test '+x;
+                
+                slead.Company='testCompany '+x;
+            testLeads.add(slead);
+            
+            
+        }
+        
+       
+        insert testLeads;  // Trigger Run LeadTrigger FistName,LastName and Company text Case Uppercase.
+    }   // Factory Setting
+    
+    @isTest
+    public static void leadTest1(){
+        
+               
+        // Test & Evaluate
+        
+        List<Lead> multiTest = [SELECT id,firstName,LastName,Company FROM Lead];
+        
+        system.debug('Trigger Result : '+ multiTest);
+        
+        Integer x=1;
+        
+        System.assertEquals(500, multiTest.size());
+        
+        /*
+        for(Lead testLead:multiTest){
+            System.debug(testLead);
+           // System.assertEquals('TEST '+x, testLead.firstName);
+            x++;
+            
+        }
+*/
+      
+        delete multiTest;
+        System.debug('MultiTest Delete');
+        
+        List<Lead> deleteTest = [SELECT id,firstName,LastName,Company FROM Lead ];
+        
+        System.debug(deleteTest.size());
+        
+    }
+    
+    @isTest
+    public static void test2(){   // return to factory setting ( TEST SETUP )
+        
+        List<Lead> testLead  = [SELECT Id,FirstName,LastName,Company FROM Lead];
+        
+        System.debug('check Factory Setting');
+        System.debug(testLead.size());
+        System.debug(testLead.get(0).FirstName);
+        System.assertEquals(500, testLead.size());
+        
+        
+    }
+}
+
+
+yeni test____________________________________________________________________________________________________
+
+@isTest
+public class LeadTest {
+    
+    @testSetup
+    public static void setup(){ // Factory Setting
+        
+         // Prepare Data
+        List<Lead> testLeads = New List<Lead>();
+        
+        for(Integer x=1;x<=100;x++){  // no phone....
+            Lead slead = New Lead();
+            
+                slead.FirstName='test '+x;
+                slead.LastName='test '+x;
+               
+                slead.Company='testCompany '+x;
+            testLeads.add(slead);
+            
+            
+        }
+        
+        for(Integer x=1;x<=100;x++){  // with Phone
+            Lead slead = New Lead();
+            
+                slead.FirstName='test '+x;
+                slead.LastName='test '+x;
+                slead.phone='1111111111';
+                slead.Company='testCompany '+x;
+            testLeads.add(slead);
+            
+            
+        }
+        
+       
+        insert testLeads;  // Trigger Run LeadTrigger FistName,LastName and Company text Case Uppercase.
+    }   // Factory Setting
+    
+    @isTest
+    public static void leadTest1(){
+        // is there any task records...
+        
+        list<Lead> testLead  = [SELECT id, FirstName,LastName, Phone,Company,OwnerId,
+                                (SELECT id,Subject,ActivityDate,WhoId,OwnerId, Status,IsReminderSet,ReminderDateTime 
+                                 FROM TASKS) 
+                                FROM LEAD];
+        
+        Integer countTask=0;
+        
+        for(Lead singleLead:testLead){  // 200 lead
+             if(singleLead.tasks.size()!=0){
+               countTask++; 
+            }
+             
+        }
+        
+        System.debug('TOTAL LEAD  : '+testLead.size() );
+        
+        System.debug('How Many Task Created  : '+countTask );
+        
+        System.assertEquals(200, testLead.size() );
+        
+        System.assertEquals(100, countTask );
+        
+  
+    }
+    
+    
+}
