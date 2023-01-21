@@ -1,0 +1,52 @@
+class
+public class checkrcrsv {
+public static boolean x=true;     // checkRecursive.firstcall
+}
+________________________________________________________________________________
+
+Trigger
+trigger LeadAfterUpdate on Lead (after update) {
+    
+    if(!checkrcrsv.x){
+        checkrcrsv.x=false;
+        Set<Id> LeadSetId= New Set<Id>();
+        for(Lead singleLead:trigger.New){
+            if(singleLead.Status=='Open - Not Contacted'){
+                LeadSetId.add(singleLead.id);
+                
+                // singleLead.Status='Working - Contacted';
+            }
+        }
+        List<Lead> multiLead = [SELECT Id, FirstName,LastName, Status FROM Lead WHERE id=:LeadSetId ];
+        
+        for(Lead singleLead:multiLead){
+            singleLead.Status='Working - Contacted';
+        }
+        update multiLead;
+        
+    }  
+}
+
+
+
+
+________________________________________________________________________________
+
+trigger contacttrigger on Contact (before insert) {
+
+    set <id> accid=new set <id>();
+    
+    for( contact scon:trigger.new){
+        if(scon.Phone==null) {       
+        accid.add(scon.AccountId);}
+    }
+    
+    map<id,account> x=new map<id,account>([select id,name,phone from account where id=:accid]);
+    
+     for( contact scon:trigger.new){
+        if(scon.Phone==null) {       
+        scon.OtherPhone=x.get(scon.AccountId).phone;
+        
+        }
+     }}
+//aşağıdaki flow ile aynı (fieldler farklı)...
