@@ -1,0 +1,36 @@
+- [ ]  Runs in its own **thread** and **transactions**
+- [ ]  Executes when system resources are available.
+- [ ]  It is not a realtime.
+- [ ]  Must be **static**
+- [ ]  Must have **void** return type
+- [ ]  Parameters must be **primitive or collection** (MAP, SET, LIST) **of primitive** datatypes.
+- [ ]  Future methods cannot be called from another future method.
+- [ ]  Limit to 50 future calls per transaction
+- [ ]  Can’t trigger future call in a future call
+- [ ]  Use System.isFuture in code to avoid call a future method.
+
+***dışardan list account vs. alamaz***
+
+***(callout=true) ile api çağırılabilir dışarıdan***
+
+
+public class LeadFuture {
+
+    @future   // (callout=true)
+    public static void updatephone(string cn,string phone){
+        
+        list<lead> ml=[select id, firstname,lastname,company,phone from lead where company=:cn];
+        
+        for(lead sl:ml){
+            sl.phone=phone;
+        }
+        update ml;
+        system.debug(ml);
+    }
+}
+
+
+
+
+debug
+LeadFuture.updatephone('clarus','128963602');
