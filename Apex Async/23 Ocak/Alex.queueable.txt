@@ -1,0 +1,52 @@
+- [ ]  Advanced version of Future Async Apex method.
+- [ ]  You can directly pass Sobject which future cannot do this.
+- [ ]  It allows you to monitor your apex jobs.
+- [ ]  Unlike Future it allows you to chain your jobs.
+- [ ]  Requires a **separate class**
+- [ ]  50 Jobs in a synchronous transaction but only 1 while in asynchronous transaction
+- [ ]  Can **chain** queueables together
+- [ ]  No limit on how many can be chained together
+- [ ]  Invoke one by using system.enqueueJob()
+
+
+
+
+
+public class LeadQueueable implements queueable{
+
+    list <lead> ml=new list <lead>();
+    string ls;
+    public LeadQueueable(list<lead> a, string ls){
+        ml=a;
+        this.ls=ls;
+    }
+    
+    
+    public  void execute(QueueableContext c){
+     
+       // list<lead> lq= [select id , name ,leadsource from lead where leadsource =null];
+        
+        for(lead l:ml){
+            l.LeadSource=ls;
+                   }
+        update ml;
+    }
+}
+
+
+____________________________________________________________________
+
+
+
+debug;
+
+list<lead> h=[select id, name, company, phone
+             from lead where company='clarus'];
+system.debug(h);
+
+leadqueueable vd=new leadqueueable(h,'Purchased List');
+id leadqueueable=system.enqueueJob(vd);
+
+/*leadqueueable vd=new leadqueueable();
+id leadqueueable=system.enqueueJob(vd);
+system.debug(leadqueueable);*/
