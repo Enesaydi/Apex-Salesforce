@@ -1,0 +1,40 @@
+CLASS OLUYOR ALTA BAK DEĞİŞİK İSİMLER VE METHOD ADI DEFOULT
+
+public class LeadQueueable implements queueable{
+
+    list <lead> ml=new list <lead>();
+    string ls;
+    public LeadQueueable(list<lead> a, string ls){
+        ml=a;
+        this.ls=ls;
+    }
+    
+    
+    public  void execute(QueueableContext c){
+     
+       // list<lead> lq= [select id , name ,leadsource from lead where leadsource =null];
+        
+        for(lead l:ml){
+            l.LeadSource=ls;
+                   }
+        update ml;
+    }
+}
+
+
+____________________________________________________________________
+
+
+
+debug;
+
+list<lead> h=[select id, name, company, phone
+             from lead where company='clarus'];
+system.debug(h);
+
+leadqueueable vd=new leadqueueable(h,'Purchased List');
+id leadqueueable=system.enqueueJob(vd);
+
+/*leadqueueable vd=new leadqueueable();
+id leadqueueable=system.enqueueJob(vd);
+system.debug(leadqueueable);*/

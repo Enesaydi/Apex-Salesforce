@@ -1,0 +1,64 @@
+public class LeadBatch implements Database.Batchable<SObject> { 
+
+// Start
+public Database.QueryLocator start(Database.BatchableContext BC){
+   return Database.getQueryLocator('SELECT Id FROM Lead');
+   }
+
+ // execute
+public void execute(Database.BatchableContext BC, List<Lead> scope){
+   for(Lead s:scope){
+   // batch actions
+   s.LeadSource='Web';
+	 System.debug(s.id + 'Ids record is processed now...');
+   }
+}
+
+// finish
+public void finish(Database.BatchableContext BC){
+   System.debug('Batch Finished');
+// You can call another Batch Class also when this batch is finished other will start.
+}
+
+}
+____________________________________________________________________________
+
+leadBatch f=new leadbatch();
+Database.executeBatch(f,4); 
+
+____________
+
+leadBatch f=new leadbatch();
+// Database.executeBatch(f,4);
+
+system.scheduleBatch(f, 'lead batch job', 2,30);
+
+
+
+
+________________________________benim örnek____________________________________
+
+public class LeadBatch implements Database.Batchable<SObject> { 
+
+// Start
+
+    public database.QueryLocator start(database.Batchablecontext x){
+        return database.getQueryLocator('select id.firstname, lastname, company,leadsource,phone , email from lead');
+    }
+        
+ // execute
+
+    public void execute(database.BatchableContext x,list <lead> sc){
+        for(lead sl:sc){
+            sl.firstname=sl.firstname.toUpperCase();
+            sl.lastname=sl.lastname.toUpperCase();
+        }update sc
+    }
+
+// finish
+
+    public void finish (database.BatchableContext x){
+        system.debug('batch is finished');
+    }
+    
+}
