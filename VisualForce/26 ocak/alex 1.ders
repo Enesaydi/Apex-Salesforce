@@ -1,0 +1,42 @@
+<apex:page standardController="Account" lightningStylesheets="true">
+
+  <apex:form >
+      <apex:pageblock title="Account Details">
+      <apex:pageBlockButtons >
+          <apex:commandButton value="Sever mi" action="{!save}"/>
+          <apex:commandButton value="cancel" action="{!Cancel}"/>
+          <apex:commandButton value="Delete" action="{!delete}"/>
+          <apex:commandButton value="Quicksave" action="{!quicksave}"/>
+      </apex:pageBlockButtons>
+      
+          <apex:pageBlockSection title="Account Communication Detail" columns="2">
+          
+             <apex:inputField value="{!Account.Name}"/>
+             <apex:inputField value="{!Account.Phone}"/>
+             <apex:inputField value="{!Account.WebSite}"/>
+             
+      
+              <apex:inputField value="{!Account.BillingStreet}"/>
+                  
+          </apex:pageBlockSection>
+          <apex:commandButton value="Sever mi" action="{!save}"/>
+          <apex:commandButton value="cancel" action="{!Cancel}"/>
+          <apex:commandButton value="Delete" action="{!delete}"/>
+          <apex:commandButton value="Quicksave" action="{!quicksave}"/>
+          
+      </apex:pageblock>
+      
+      
+      <apex:pageblock title="Block 2">
+          <apex:pageBlockSection title="page block section 3">
+              <p> section 3 content here.....</p>
+          </apex:pageBlockSection>
+          
+          <apex:pageBlockSection title="page block section 4">
+              <p> section 4 content here.....</p>
+          </apex:pageBlockSection>
+          
+      </apex:pageblock>
+  </apex:form>
+  
+</apex:page>
