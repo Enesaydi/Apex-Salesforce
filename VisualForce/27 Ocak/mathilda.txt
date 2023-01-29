@@ -1,0 +1,72 @@
+public class Kitapvc {
+    public static string isim{set;get;}
+    public static kitap__c tekKayit{set; get;}
+    public static list<kitap__c> getKayitList(){
+        list<kitap__c> x=[SELECT id,Name from kitap__c];
+        return x;
+    }
+    public PageReference SilMethod(){
+		string gelsilid=system.currentPageReference().getParameters().get('silid');
+        kitap__c c=[SELECT id,Name From kitap__c where id=:gelsilid];
+        delete c;
+        return NULL;
+    }
+    public PageReference GosterMethod(){
+        string gelgosterid=system.currentPageReference().getParameters().get('gosterid');
+        PageReference  nextPage=new PageReference('/apex/DetayPg?id='+gelgosterid);
+        tekKayit=[SELECT id,Name from kitap__c where id=:gelgosterid ];
+        return nextPage;
+    }
+    public PageReference GuncelleMethod(){
+        string gelgunid=system.currentPageReference().getParameters().get('gunid');
+        kitap__c y=[SELECT id,Name from kitap__c where id=:gelgunid];
+        y.Name=isim;
+        update y;
+        PageReference np=new PageReference('/apex/Kitapvf');
+        return np ;
+    }
+}
+8:00
+...................................................
+8:00
+<apex:page controller="Kitapvc" >
+  <apex:form>
+    <apex:pageBlock>
+        <apex:pageBlockTable value="{!KayitList}" var="a">
+            <apex:column value="{!a.Name}" />
+            <apex:column >
+                <apex:commandLink action="{!SilMethod}" >Sil
+                    <apex:param value="{!a.id}" name="silid"  />
+                </apex:commandLink>
+                <apex:commandLink style="margin-left:10px" action="{!GosterMethod}" >Göster
+                    <apex:param name="gosterid" value="{!a.id}"/>
+                </apex:commandLink  >
+                <apex:commandLink style="margin-left:10px"  action="{!GosterMethod}" > Düzenle
+                    <apex:param name="gosterid" value="{!a.id}"/>
+                </apex:commandLink>
+            </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+ </apex:form>
+</apex:page>
+8:00
+.........................................................
+8:01
+<apex:page controller="Kitapvc" >
+    <apex:pageBlock>
+        <h1>ID</h1>
+        <br/>
+        <apex:outputText value="{!tekKayit.id}"/>
+        <br/>
+         <h1>İSİM</h1>
+        <br/>
+        <apex:outputText value="{!tekKayit.Name}"/>
+        <br/>
+        <apex:form>
+            <apex:inputText value="{!isim}"/>
+            <apex:commandLink action="{!GuncelleMethod}" >Kaydet
+                <apex:param name="gunid" value="{!tekKayit.id}"/>
+            </apex:commandLink>
+        </apex:form>
+    </apex:pageBlock>
+</apex:page>
