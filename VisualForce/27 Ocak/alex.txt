@@ -1,0 +1,105 @@
+<apex:page controller="dvlprtl"  docType="html-5.0" lightningStylesheets="true">
+
+<apex:form style="text-align:center;margin-top:30px">
+<h1>Developer Mod: for (Account) </h1>
+Name:<apex:inputText value="{!prefix}"/> 
+How many:<apex:input value="{!howmany}"/><br/><br/>
+<apex:commandButton value="Create" action="{!createAcc}"/>
+</apex:form>
+<apex:form >
+  
+        <apex:inputText value="{!searchTerm}" label="NamePref" id="NamePref"/>
+     
+         <apex:commandButton value="Search" action="{!searchAcc}"/>
+         <apex:commandButton value="Delete" action="{!deleteAcc}"/>
+  
+  </apex:form>
+ 
+ 
+ <apex:form >
+     <apex:pageBlock >
+     
+         <apex:pageblockTable var="singleAcc" value="{!multiAcc}">
+             <apex:column headerValue="Name">
+                 <apex:inputfield value="{!singleAcc.Name}"/>
+             
+             </apex:column>
+             
+              <apex:column headerValue="Phone">
+                 <apex:inputfield value="{!singleAcc.Phone}"/>
+             
+             </apex:column>            
+             
+             <apex:column headerValue="Industry">
+                 <apex:inputfield value="{!singleAcc.Industry}"/>
+             
+             </apex:column>     
+                     
+              <apex:column headerValue="Website">
+                 <apex:inputfield value="{!singleAcc.Website}"/>
+             
+             </apex:column>            
+         </apex:pageblockTable>
+         
+         <apex:pageblockButtons >
+         
+             <apex:commandButton value="Update" action="{!updateAcc}"/>
+         
+         </apex:pageblockButtons>
+     </apex:pageBlock>
+</apex:form>
+</apex:page>
+
+_______________________________________________________________________________________________________________
+
+
+public class dvlprtl {
+
+public integer howmany{get;set;}
+public string prefix{get;set;}
+public list<account> multiAcc{get;set;}
+public String searchTerm {get;set;}
+
+    public dvlprtl(){
+    howmany=0;
+    prefix='';
+    multiAcc =New List<Account>();}
+
+       public PageReference createAcc() {
+       
+           for(Integer x=1;x<=howMany;x++ ){
+               Account singleAcc = New Account();
+               singleAcc.Name=prefix+' - '+x;
+               multiAcc.add(singleAcc);
+           
+           }
+           insert multiAcc;
+       
+        return null;
+    }
+
+public PageReference deleteAcc() {
+       delete multiAcc;
+       
+       multiAcc.clear();
+       
+        return null;
+    }
+    public PageReference searchAcc() {
+    
+    String SearchSOQL = '%'+searchTerm+'%';
+    
+    multiAcc=[SELECT Id, Name, Phone, Website,Industry 
+              FROM Account WHERE Name LIKE :SearchSOQL];
+        return null;
+    }
+   public PageReference updateAcc() {
+   
+       update multiAcc;
+       
+        return null;
+    }
+
+
+
+}
