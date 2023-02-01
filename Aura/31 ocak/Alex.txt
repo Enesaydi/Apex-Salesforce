@@ -1,0 +1,110 @@
+<aura:application extends="force:slds">
+  
+   
+	<c:hello></c:hello>
+    <hr/>
+   
+</aura:application>
+
+
+
+
+({
+	handleClick : function(component, event, helper) {
+		console.log('buton tıkladı...');
+        
+        var msg=component.get("v.helom");
+        console.log(msg);
+        component.set("v.helom","aura is mylife slcksmad");
+	}
+})
+
+
+
+
+
+.cmp
+
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+    <aura:attribute type="string" name="helom" default="hello aura"/>
+    aura attribute : {!v.helom}
+        <br/>
+    <br/>
+    <lightning:button variant="destructive" label="Destructive" 
+                      title="Destructive action" onclick="{! c.handleClick }"/>
+    <br/>
+    <br/>
+    <lightning:card footer="Card Footer" title="Hello">
+        <aura:set attribute="actions">
+            <lightning:button label="New"/>
+        </aura:set>
+        <p class="slds-p-horizontal_small">
+            Card Body (custom component)
+        </p>
+    </lightning:card>
+    
+</aura:component>
+...............................................................................................
+
+<aura:application extends="force:slds">
+    <hr/>
+    <c:calclt></c:calclt>
+    <hr/>
+</aura:application>
+___________________________________________________________________________________________
+
+java
+
+({	sum : function(component, event, helper) {
+		
+        var x=component.get("v.xno");
+        var y=component.get("v.yno");
+        
+        var resultvalue = Number(x)+Number(y);
+        
+        component.set("v.result",resultvalue);
+	}})
+
+    ___________________________________________________________________________________________
+
+    component
+
+    .cmp
+
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+({
+	sum : function(component, event, helper) {
+		
+        var x=component.get("v.xno");
+        var y=component.get("v.yno");
+        
+        var resultvalue = Number(x)+Number(y);
+        
+        component.set("v.result",resultvalue);
+	}
+})({
+	sum : function(component, event, helper) {
+		
+        var x=component.get("v.xno");
+        var y=component.get("v.yno");
+        
+        var resultvalue = Number(x)+Number(y);
+        
+        component.set("v.result",resultvalue);
+	}
+})<aura:attribute name="xno" type="decimal"/>
+        <aura:attribute name="yno" type="decimal"/>
+        <aura:attribute name="result" type="decimal"/>
+    
+    <lightning:input type="number" name="xnoin"
+                     label="enter the x v" value="{!v.xno}"
+                     formatter="decimal" step="0.01"/>
+    <lightning:input type="number" name="ynoin"
+                     label="enter the y v" value="{!v.yno}"
+                     formatter="decimal" step="0.01"/>
+   
+    <lightning:button label="+" title="+" onclick="{!c.sum}" />
+    <br/><br/>
+    Result of {!v.xno} + {!v.yno} = {!v.result}
+</aura:component>
