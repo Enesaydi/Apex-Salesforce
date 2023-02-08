@@ -1,0 +1,28 @@
+<aura:component>
+    <aura:if isTrue="{!v.truthy}">
+    True
+    <aura:set attribute="else">
+      False
+    </aura:set>
+  </aura:if> 
+</aura:component>
+
+______________________________________________________________________________
+
+
+comp//
+
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	hello<br/>
+     <meter value="{!2 / 5}"/><br/>
+     <aura:iteration items="1,2,3,4,5" var="item">
+        <meter value="{!item / 5}"/><br/>
+    </aura:iteration>
+    <br/><br/><br/><br/><br/>
+    
+   
+         <aura:iteration items="1,2,3,4,5" var="item">
+        <p>{!item}</p><br/>
+    </aura:iteration>
+    
+</aura:component>
