@@ -1,0 +1,136 @@
+<aura:component controller="accountcompapex"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <aura:attribute name="sia" type="Account" default="{
+                                                     'sobjectType':'Account',
+                                                     'Name':'',
+                                                     'Phone':''
+                                                               }"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doinit}" />
+    <aura:attribute name="multiAcc" type="Account[]" />
+    
+    <aura:attribute name="accid" type="string"/>
+    <aura:attribute name="msg" type="string"/>
+    
+    <lightning:input name="accouname" label="Enter a name"  value="{!v.sia.Name}"/>
+    <lightning:input name="accounphon" label="Enter a phone"  value="{!v.sia.Phone}"/>
+    
+    <lightning:button variant="brand-outline" label="Create acc"  onclick="{! c.handleClick }" />
+    
+    <br/> <br/>created account id : {!v.accid}<br/>
+
+    Message : {!v.msg}  <br/>  
+    <hr />
+    
+    {!v.multiAcc}
+    <aura:iteration var="single" items="{!v.multiAcc}" >
+        {!single.Name} - {!single.Phone} - {!single.Id}  <br />
+    </aura:iteration>
+</aura:component>
+
+
+______________________________________________________________________________
+({
+    doinit : function(component, event, helper) {
+        
+        var server = component.get("c.retrieveacc");  // accountServerController.retrieveacc();  
+      
+        // callback 
+        server.setCallback(this,function(res){            
+            console.log(res);
+            
+            var state = res.getState();
+            console.log(state);
+           
+            if(state=='SUCCESS'){
+                var returnedValue = res.getReturnValue();
+                console.log(returnedValue);
+                
+                component.set("v.multiAcc",returnedValue);
+                
+            } else {
+                var errormsg = res.getError()[0].message;
+                console.log(errormsg);
+                
+                 component.set("v.msg",errormsg);
+                
+            }
+            
+            
+        });
+        
+        
+        
+        
+        $A.enqueueAction(server);
+        
+    },
+    
+    handleClick : function(component, event, helper) {
+		
+        
+        var sc=component.get("v.sia");
+        console.log(sc.Name);
+       var server=component.get("c.creat");
+        // set params
+        server.setParams({'sia':sc});
+        
+        //callback
+        server.setCallback(this,function(response){
+            console.log(response);
+            var state=response.getState();
+            console.log(state);
+            
+            if(state=='SUCCESS'){
+                var returnval=response.getReturnValue();
+                component.set("v.accid",returnval);
+            }else
+            {
+                 var errormsg=response.getError()[0].message;
+                
+                console.log(errormsg);
+                component.set("v.msg",errormsg);
+               
+            }
+        });
+        
+        
+         $A.enqueueAction(server);
+	}
+})
+
+
+______________________________________________________________________________
+
+
+
+public class accountcompapex {
+
+    @auraEnabled
+    public static String creat(account sia){
+       
+        try{
+            insert sia;}
+        catch(exception e){
+            throw new AuraHandledException(e.getMessage());
+        }
+        return sia.id;
+    }
+    
+    @auraEnabled
+    public static List<Account> retrieveacc(){
+        
+        List<Account> multiacc = New List<Account>();
+        
+        try{
+            multiacc= [SELECT Id, Name, Phone,Website, Industry FROM Account ORDER BY Createddate DESC LIMIT 10];
+        } catch(Exception e){
+            throw new AuraHandledException(e.getMessage());
+        }
+        
+         
+        
+        return multiacc;        
+    }
+}
