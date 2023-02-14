@@ -1,0 +1,23 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-14-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <lightning-card  variant="Narrow"  title="Calculator" icon-name="standard:number_input">
+        
+        <lightning-button variant="brand" label=" + " title=" + " onclick={sum} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button variant="destructive-text" label=" - " title="Destructive action with a lighter look" onclick={sub} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button variant="destructive" label=" * " title="Destructive action" onclick={mul} class="slds-m-left_x-small"></lightning-button>
+        <lightning-button variant="success" label=" / " title="Successful action" onclick={div} class="slds-m-left_x-small"></lightning-button>
+
+        <p class="slds-p-horizontal_small">
+            <lightning-input type="number" name="input1" value={no1} label="Enter 1. number" onchange={handleChange1}></lightning-input>
+            <lightning-input type="number" name="input2" value={no2} label="Enter 2. number" onchange={handleChange2}></lightning-input>
+
+        </p>
+        <p slot="footer">{result}</p>
+    </lightning-card>
+</template>
