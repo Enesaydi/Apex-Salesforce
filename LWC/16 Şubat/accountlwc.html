@@ -1,0 +1,26 @@
+<!--
+  @description       : 
+  @author            : ChangeMeIn@UserSettingsUnder.SFDoc
+  @group             : 
+  @last modified on  : 02-15-2023
+  @last modified by  : ChangeMeIn@UserSettingsUnder.SFDoc
+-->
+<template>
+    <lightning-card  variant="Narrow"  title="Account comp." icon-name="standard:account">
+        <lightning-button-icon onclick={handcl} icon-name="utility:down" variant="border-filled" alternative-text="Show More" slot="actions"></lightning-button-icon>
+        <p class="slds-p-horizontal_small">
+            <lightning-input type="text" value={inputs} onchange={handin} label="Enter some text"></lightning-input>  
+            <template if:true={mua}>
+              
+                <lightning-datatable
+                key-field="id"
+                data={mua}
+                columns={columns}>
+        </lightning-datatable>
+            </template>
+
+        </p>
+        <p slot="footer">Last 10 (wire) + 10 (imperative) Account</p>
+    </lightning-card>
+
+</template>
